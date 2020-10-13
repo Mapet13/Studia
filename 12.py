@@ -17,7 +17,7 @@ np dla 138, 27:
 """
 def NWD(x, y):
     z = 0                       # zmienna pomocnicza
-    while (y != 0):             # dopłuki y nie jest dzielnikiem x
+    while (y != 0):             # dopóki y nie jest dzielnikiem x
         z = x % y               #   przypisanie reszty z dzielenia do zmiennej Z
         x = y                   #   do liczby nr 1 zostaje wpisana wartosc liczby 2
         y = z                   #   do liczby nr 2 zostaje wpisana warosc reszty z dzielenia
