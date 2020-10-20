@@ -35,19 +35,33 @@ if is_palindrome_10:
     
 """
 dla binarnych:
-    dla np 77 -> '100101' w binarnym (ma 6 cyfr)
-        - przesuwam binarnie w prawo o 3 miejsca (bo 6/2) [bin_h = 100]
-        - binarne 'and' z 2^3 - 1 czyli z (000111) i dostaje [bin_t = 101]
+    dla np 76 -> '1001100' w binarnym (ma 7 cyfr)
+        - przesuwam binarnie w prawo o 4 miejsca (bo sufit z 7/2) [bin_h = 100]
+        - odwracam bin_h negacją bitowa i dostaje [bin_h = 001]
+        - binarne 'and' z 2^3 - 1 czyli z (0000111) i dostaje [bin_t = 100]
         - sprawdzam czy bin_h == bin_t (w tym przypadku się nie zgadza)
     dla np 31 -> '11111' w binarnym (ma 5 cyfr)
         - przesuwam binarnie w prawo o 3 miejsca (bo sufit z (5/2)) [bin_h = 11]
+        - odwracam bin_h negacją bitowa i dostaje [bin_h = 11]
         - binarne 'and' z 2^2 - 1 czyli z (000011) i dostaje [bin_t = 11]
         - sprawdzam czy bin_h == bin_t (w tym przypadku się zgadza)
 """
     
+def reverse_bits(n):
+    res = 0
+    while n > 0:
+        res <<= 1   # YYY0
+        if n & 1 == 1: # jezeli LSB w n jest 1 to zamieniam tamto dodane 0 na 1 w res 
+            res ^= 1   #    res xor 0001 -> zamienia ostatnie 0 na 1 a pozostałe bity zostawia 
+        n >>= 1 # 0YYY
+    return res 
+        
+    
 bin_dc = floor(log2(num)) + 1
-bin_h = num >> ceil(bin_dc / 2)
+bin_h = reverse_bits(num >> ceil(bin_dc / 2))
 bin_t = num & (2**floor(bin_dc / 2) - 1)
+
+print(bin(bin_h), bin(bin_t))
 
 if bin_h == bin_t:
     print(f"Liczba {bin(num)} jest palindromem w systemie binarnym")
