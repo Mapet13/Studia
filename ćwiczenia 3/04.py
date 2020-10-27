@@ -8,8 +8,8 @@ n = int(input("n: "))
 
 result = 0
 
-# aby liczby jakby po tych "n" tez mialy znaczenie przy liczeniu, potem przy wypisywaniu usunę te "bonusowe cyfry" 
-bonus_precision = 10 
+#jest potrzebne do zaokraglenia
+bonus_precision = 1
 
 i = 2
 current_factorial = 1
@@ -19,4 +19,11 @@ while current_factorial <= 10**n:
     result += ten_to_n // current_factorial
     i += 1
     
-print("2.", result//10**bonus_precision, sep='')
+bonus_digits = result % (10 ** bonus_precision)
+result //= (10 ** bonus_precision)
+
+#zaokragalnie bo z round wywala float out of range xD
+if bonus_digits >= ((10 ** bonus_precision) // 2):
+    result += 1
+    
+print("2.", result, sep='')
