@@ -9,12 +9,12 @@ n = int(input("n: "))
 result = 0
 
 #jest potrzebne do zaokraglenia
-bonus_precision = 1
+bonus_precision = 10
 
 i = 2
 current_factorial = 1
 ten_to_n = 10**(n+bonus_precision) # kozystam że int w pythonie nie ma max
-while current_factorial <= 10**n:
+while current_factorial <= ten_to_n:
     current_factorial *= i
     result += ten_to_n // current_factorial
     i += 1
