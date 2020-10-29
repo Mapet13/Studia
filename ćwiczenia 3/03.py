@@ -7,7 +7,7 @@ n = int(input())
 tab = [True] * n
 
 i = 2
-while i < n:
+while i*i <= n:
     if tab[i]:
         print(i)
         j = 2 * i
