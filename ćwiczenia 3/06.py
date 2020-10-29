@@ -1,16 +1,20 @@
+'''
+Napisać program wypełniający N-elementową tablicę t liczbami naturalnymi 1-1000 
+i sprawdzający czy każdy element tablicy zawiera co najmniej jedną cyfrę nieparzystą.
+'''
+
 from random import randint 
 
 n = int(input("n: "))
 
 t = [0] * n
-
 for i in range(n):
     t[i] = randint(1, 1000)
-    
-is_correct = True
 
 #tylko żeby sprawdzić
 print(t)
+
+is_correct = True
 
 #najchetniej poączył bym te 2 pętle ale nw czy w tym zadaniu to legalne xD
 i = 0
