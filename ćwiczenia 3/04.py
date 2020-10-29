@@ -13,7 +13,7 @@ bonus_precision = 10
 
 i = 2
 current_factorial = 1
-ten_to_n = 10**(n+bonus_precision) # kozystam że int w pythonie nie ma max
+ten_to_n = 10**(n+bonus_precision) # kozystam że int w pythonie nie ma max <-- podobno mamy z tego nie kozystac xD
 while current_factorial <= ten_to_n:
     current_factorial *= i
     result += ten_to_n // current_factorial
