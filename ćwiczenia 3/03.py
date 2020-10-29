@@ -1,17 +1,18 @@
 '''
 Napisać program generujący i wypisujący liczby pierwsze mniejsze od N metodą Sita Eratostenesa.
 '''
+from math import sqrt, ceil
 
-n = int(input())
+n = int(input("n = "))
 
-tab = [True] * n
+t = [True] * n
+t[0] = t[1] = False
 
-i = 2
-while i < n:
-    if tab[i]:
-        print(i)
-        j = 2 * i
-        while j < n:
-            tab[j] = False
-            j += i
-    i += 1
+for i in range(2, ceil(sqrt(n))):
+    if t[i]:
+        for j in range(i * i, n, i):
+            t[j] = False
+
+for i in range(1, n):
+    if t[i]:
+        print(i)  
