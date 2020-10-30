@@ -14,18 +14,18 @@ def getLongestGeometricSubsequenceLength(t, n):
     q = (t[1] / t[0]) if t[0] != 0 else 0
     for i in range(2, n):
         new_q = (t[i] / t[i-1]) if (t[i-1] != 0) else 0
-        if new_q != q or i == (n -1):
+        if new_q != q or i == (n - 1):
             if current > best:
                 begin_index = current_begin
                 end_index = i
                 best = current
-            current_begin = i
-            current = 1
+            q = new_q
+            current_begin = i - 1
+            current = 2
         else:
             current += 1
 
     # as debug code
-    print('q =', q)
     for i in range(begin_index, end_index):
         print(t[i])
 
