@@ -4,7 +4,7 @@ wyznacza długość najdłuższego, spójnego podciągu arytmetycznego.
 '''
 from random import randint
 
-def getLongestArithmeticSubsequenceLength(t, n):
+def getLongestGeometricSubsequenceLength(t, n):
     begin_index = 0
     end_index = 2
     best = end_index - begin_index
@@ -40,4 +40,4 @@ tab = generateArray(n)
 # as debug code
 print(tab)
 
-print("len:", getLongestArithmeticSubsequenceLength(tab, n))
+print("len:", getLongestGeometricSubsequenceLength(tab, n))
