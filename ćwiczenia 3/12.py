@@ -15,8 +15,6 @@ n = int(input("n: "))
 t = generateArray(n)
 
 best = [1, 1]
-begining_index = [0, 0]
-end_index = [0, 0]
 
 d = 0
 current = 1
@@ -24,18 +22,14 @@ current_begin = 0
 for i in range(1, n):
     new_d = t[i] - t[i-1]
     
-    if new_d != d or i == (n -1):
+    if new_d != d or i == (n - 1):
         if d != 0:
             pn_index = int(d < 0)
-            if best[pn_index] < current:
-                begining_index[pn_index] = current_begin        
-                end_index[pn_index] = i        
+            if best[pn_index] < current:     
                 best[pn_index] = current        
                 
         d = new_d   
         current = 2
-        current_begin = i - 1
-        
     else:
         current += 1     
 

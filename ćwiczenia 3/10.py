@@ -5,9 +5,9 @@ wyznacza długość najdłuższego, spójnego podciągu arytmetycznego.
 from random import randint
 
 def getLongestArithmeticSubsequenceLength(t, n):
-    begin_index = 0
-    end_index = 2
-    best = end_index - begin_index
+    #begin_index = 0
+    #end_index = 2
+    best = 2
     
     current = 2
     current_begin = 0
@@ -16,8 +16,8 @@ def getLongestArithmeticSubsequenceLength(t, n):
         new_d = t[i] - t[i-1]
         if new_d != d or i == (n -1):
             if current > best:
-                begin_index = current_begin
-                end_index = i
+                #begin_index = current_begin
+                #end_index = i
                 best = current
             d = new_d
             current_begin = i - 1
@@ -26,8 +26,8 @@ def getLongestArithmeticSubsequenceLength(t, n):
             current += 1
 
     # as debug code
-    for i in range(begin_index, end_index):
-        print(t[i])
+    #for i in range(begin_index, end_index):
+    #    print(t[i])
 
     return best
 

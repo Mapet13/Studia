@@ -5,20 +5,20 @@ wyznacza długość najdłuższego, spójnego podciągu rosnącego.
 from random import randint
 
 def getLongestAscendingSubsequenceLength(t, size):
-    begin_index = 0
-    end_index = 2
-    best = end_index - begin_index
+    #begin_index = 0
+    #end_index = 2
+    best = 2
      
-    current = 1
+    current = 2
     current_begin = 0
     for i in range(2, size):
         if t[i] <= t[i-1] or i == (size - 1):  # ten 2 warunek aby sprawdzić czy czasem podciąg kończący sie na ostatnim nie jest czasem największy
             if best < current:
-                begin_index = current_begin
+                #begin_index = current_begin
+                #end_index = i
                 best = current
-                end_index = i
-            current_begin = i
-            current = 1
+            current_begin = i -1
+            current = 2
         else:
             current += 1
 
@@ -26,7 +26,7 @@ def getLongestAscendingSubsequenceLength(t, size):
     #for i in range(begin_index, end_index):
     #    print(t[i])
         
-    return (end_index - begin_index)
+    return best
     
     
 def getRandomArray(n):
