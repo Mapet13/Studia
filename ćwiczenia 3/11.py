@@ -1,6 +1,6 @@
 '''
 Napisać funkcję, która dla N-elementowej tablicy t wypełnionej liczbami naturalnym 
-wyznacza długość najdłuższego, spójnego podciągu arytmetycznego.
+wyznacza długość najdłuższego, spójnego podciągu geometrycznego.
 '''
 from random import randint
 
