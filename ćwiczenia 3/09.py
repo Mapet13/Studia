@@ -10,14 +10,14 @@ def getLongestAscendingSubsequenceLength(t, size):
     best = 2
      
     current = 2
-    current_begin = 0
+    #current_begin = 0
     for i in range(2, size):
         if t[i] <= t[i-1] or i == (size - 1):  # ten 2 warunek aby sprawdzić czy czasem podciąg kończący sie na ostatnim nie jest czasem największy
             if best < current:
                 #begin_index = current_begin
                 #end_index = i
                 best = current
-            current_begin = i -1
+            #current_begin = i -1
             current = 2
         else:
             current += 1

@@ -10,7 +10,7 @@ def getLongestArithmeticSubsequenceLength(t, n):
     best = 2
     
     current = 2
-    current_begin = 0
+    #current_begin = 0
     d = t[1] - t[0] 
     for i in range(2, n):
         new_d = t[i] - t[i-1]
@@ -20,7 +20,7 @@ def getLongestArithmeticSubsequenceLength(t, n):
                 #end_index = i
                 best = current
             d = new_d
-            current_begin = i - 1
+            #current_begin = i - 1
             current = 2
         else:
             current += 1

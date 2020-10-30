@@ -18,7 +18,6 @@ best = [1, 1]
 
 d = 0
 current = 1
-current_begin = 0
 for i in range(1, n):
     new_d = t[i] - t[i-1]
     

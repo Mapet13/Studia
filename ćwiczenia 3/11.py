@@ -10,7 +10,7 @@ def getLongestGeometricSubsequenceLength(t, n):
     best = 2
     
     current = 2
-    current_begin = 0
+    #current_begin = 0
     q = (t[1] / t[0]) if t[0] != 0 else 0
     for i in range(2, n):
         new_q = (t[i] / t[i-1]) if (t[i-1] != 0) else 0
@@ -20,7 +20,7 @@ def getLongestGeometricSubsequenceLength(t, n):
                 #end_index = i
                 best = current
             q = new_q
-            current_begin = i - 1
+            #current_begin = i - 1
             current = 2
         else:
             current += 1
