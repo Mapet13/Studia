@@ -6,7 +6,7 @@ from random import randint
 
 def getLongestArithmeticSubsequenceLength(t, n):
     begin_index = 0
-    end_index = 1
+    end_index = 2
     best = end_index - begin_index
     
     current = 1

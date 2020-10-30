@@ -6,12 +6,12 @@ from random import randint
 
 def getLongestAscendingSubsequenceLength(t, size):
     begin_index = 0
-    end_index = 1
+    end_index = 2
     best = end_index - begin_index
      
     current = 1
     current_begin = 0
-    for i in range(1, size):
+    for i in range(2, size):
         if t[i] <= t[i-1] or i == (size - 1):  # ten 2 warunek aby sprawdzić czy czasem podciąg kończący sie na ostatnim nie jest czasem największy
             if best < current:
                 begin_index = current_begin
