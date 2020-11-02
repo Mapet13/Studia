@@ -7,7 +7,6 @@ Na przykład dla tablic: t1 = [1,3,2,4] i t2 = [9,7,4,8]
 Proszę napisać funkcje generującą i wypisująca wszystkie poprawne sumy, które są liczbami pierwszymi. 
 Do funkcji należy przekazać dwie tablice, funkcja powinna zwrócić liczbę znalezionych i wypisanych sum.
 '''
-from random import randint
 
 
 def is_prime(num):
