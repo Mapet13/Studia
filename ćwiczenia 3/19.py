@@ -7,7 +7,7 @@ Do funkcji należy przekazać tablicę,
 funkcja powinna zwrócić długość znalezionego podciągu lub wartość 0 jeżeli taki podciąg nie istnieje.
 '''
 
-def get_longest_correct_sumsequences(tab):
+def get_length_of_longest_correct_subsequence(tab):
     n = len(tab)
     
     best = 0
@@ -26,4 +26,4 @@ def get_longest_correct_sumsequences(tab):
     return best
 
 t = [10, 9, 4, 6, 1, 2] # 3 + 4 = t[3] + t[4]
-print(get_longest_correct_sumsequences(t))
+print(get_length_of_longest_correct_subsequence(t))
