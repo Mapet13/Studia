@@ -1,3 +1,12 @@
+'''
+Dana jest N-elementowa tablica t wypełniona liczbami naturalnymi. 
+Proszę napisać funkcję,która zwraca długość 
+    najdłuższego, spójnego podciągu rosnącego 
+    dla którego suma jego elementów jest równa sumie indeksów tych elementów. 
+Do funkcji należy przekazać tablicę, 
+funkcja powinna zwrócić długość znalezionego podciągu lub wartość 0 jeżeli taki podciąg nie istnieje.
+'''
+
 def get_longest_correct_sumsequences(tab):
     n = len(tab)
     
