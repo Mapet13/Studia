@@ -23,20 +23,16 @@ def f(t1, t2):
             inserted = False
             while not inserted:
                 c = (max_i+min_i) // 2
-                if t1[i][j] == t2[c] or t1[i][j] == t2[c-1]:
+                if t1[i][j] == t2[c]:
                     inserted = True
-                elif max_i == min_i or min_i == c or max_i == c:
-                    c = max_i
+                elif max_i == min_i:
                     for x in range(last, c, -1):
                         t2[x] = t2[x-1]
-                    if t2[c-1] > t1[i][j]:
-                        t2[c] = t2[c-1]
-                        c = c-1
                     t2[c] = t1[i][j]
                     inserted = True
                     last += 1
                 elif t1[i][j] > t2[c]:
-                    min_i = c
+                    min_i = c + 1
                 elif t1[i][j] < t2[c]:
                     max_i = c
     
