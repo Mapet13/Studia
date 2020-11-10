@@ -19,17 +19,17 @@ def get_num_without_digit(n, d):
 def count_friends(t):
     n = len(t)
 
-    tested = [[False for _ in range(n)] for _ in range(n)]
+    tested = [[None for _ in range(n)] for _ in range(n)]
 
     count = 0
 
     for i in range(n):
         for j in range(n):
-            if not tested[i][j]:
+            if tested[i][j] == None:
                 con = False
                 for x in range(i-min(1, i), i+min(1, n-1-i)+1):
                     for y in range(j-min(1, j), j+min(1, n-1-j)+1):
-                        if x != i or y != j:
+                        if (x != i or y != j) and tested[x][y] != True:
                             temp_center = t[i][j]
                             temp_num = t[x][y]
                             while temp_center > 0 and temp_num > 0:
@@ -39,12 +39,13 @@ def count_friends(t):
                                 temp_num = get_num_without_digit(temp_num, d)
                             if temp_num > 0 or temp_center > 0:
                                 con = True
-                                tested[i][j] = False
                                 tested[x][y] = False
+                                tested[i][j] = False
                                 break
                     if con:
                         break
                 if not con:
+                    tested[i][j] = True
                     count += 1
 
     return count
