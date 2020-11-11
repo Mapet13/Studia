@@ -9,15 +9,15 @@ Uwaga- zakładamy, że wieża szachuje cały wiersz i kolumnę z wyłączeniem p
 def get_biggest_tower_product(t):
     n = len(t)
 
-    value_tab = [[1 for _ in range(n)] for _ in range(n)]
+    value_tab = [[0 for _ in range(n)] for _ in range(n)]
 
     for i in range(n):
         for j in range(n):
             for d in range(n):
                 if i != d:
-                    value_tab[d][j] *= t[i][j]
+                    value_tab[d][j] += t[i][j]
                 if j != d:
-                    value_tab[i][d] *= t[i][j]
+                    value_tab[i][d] += t[i][j]
                     
     x1 = x2 = y1 = y2 = best = 0
     for i in range(n):
