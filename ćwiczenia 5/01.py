@@ -55,13 +55,8 @@ def add(a, b):
 
 
 def subtract(a, b):
-    l1, m1 = a
-    l2, m2 = b
-    
-    m = get_common_denominator(m1, m2)
-    l = l1 * (m // m1) - l2 * (m // m2) 
-    
-    return try_to_reduce_fraction(l, m)
+    l, m = b
+    return add(a, (-l, m))
 
 
 
@@ -84,13 +79,8 @@ def multiply(a, b):
 
 
 def divide(a, b):
-    l1, m1 = a
-    l2, m2 = b
-    
-    x = l1 * m2
-    y = l2 * m1
-    
-    return try_to_reduce_fraction(x, y)
+    l, m = b
+    return multiply(a, (m, l))
     
     
 
