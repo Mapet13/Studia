@@ -64,7 +64,7 @@ def solve(a, b):
     
     if wx[1] == 0 or wy[1] == 0 or w[1] == 0 or ((wx[0] != 0 or wy[0] != 0) and w[0] == 0):
         print("Równanie nie ma rozwiązań")
-    elif wx[0] == 0 and wy[0] and 0 and w[0] == 0:
+    elif wx[0] == 0 and wy[0] == 0 and w[0] == 0:
         print("Istnieje nieskończenie wiele rozwiązań")
     else:
         x = divide(wx, w)
