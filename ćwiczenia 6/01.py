@@ -49,7 +49,7 @@ def rec(num, last_i, current_lenth, original_lenth):
 
 def get_special_primes(num):
     lenth = get_num_lenth(num)
-    return rec(num, 1, lenth,lenth)
+    rec(num, 1, lenth, lenth)
     
     
     
