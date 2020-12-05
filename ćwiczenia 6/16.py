@@ -30,4 +30,7 @@ def wyraz(s1, s2):
     return rec(vc, weight, len(s2) - 1)
 
 print(wyraz("exe", "ula"))
-print(wyraz("exe", "hdsfsdhsdbjhasbudaclgiasjdkajytuatca"))
+print(wyraz("exe", "hdsfsldhsdbjhasbudacgiasjdkajytuatca"))
+print(wyraz("aghvda", "hdsfsldhsdbjhkjasbkatuatca"))
+print(wyraz("aghjshabjasbdhshkasbvda", "hdsfstuatca"))
+
