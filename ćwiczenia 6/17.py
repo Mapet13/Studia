@@ -19,15 +19,18 @@ def is_prime(n):
     return True
 
 
-def recur(a,b, num = 0, d = 0):
+def recur(a,b, num = 0, d = 0, s = set()):
     if a == b == 0:
-        return int(is_prime(num))
+        if is_prime(num) and num not in s:
+            s.add(num)
+            return 1
+        return 0
     
     count = 0
     if a > 0:
-        count += recur(a // 10, b, num + ((a % 10) * 10**d), d + 1)
+        count += recur(a // 10, b, num + ((a % 10) * 10**d), d + 1, s)
     if b > 0:
-        count += recur(a, b // 10, num + ((b % 10) * 10**d), d + 1)
+        count += recur(a, b // 10, num + ((b % 10) * 10**d), d + 1, s)
         
     return count
 
@@ -35,3 +38,5 @@ print(recur(123, 75))
 print(recur(2939, 89792))
 print(recur(6, 7))
 print(recur(13, 55))
+
+#todu powtarzanie

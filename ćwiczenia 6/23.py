@@ -7,28 +7,28 @@ szeregowo:  R1 + R2 + ...
 równolegle: 1/R1 + 1/R2 + ... 
 '''
 
-def can_obtain_resultant_resistance(T, s, i = 0, d = 0):
+def can_receive_resultant_resistance(T, s, i = 0, d = 0):
     if i >= len(T):
         return False
     
     if d == 3: 
         return s == 0
     
-    return (can_obtain_resultant_resistance(T, s - T[i], i + 1, d + 1) or 
-            can_obtain_resultant_resistance(T, s - (1/T[i]), i + 1, d + 1) or 
-            can_obtain_resultant_resistance(T, s, i + 1, d))
+    return (can_receive_resultant_resistance(T, s - T[i], i + 1, d + 1) or 
+            can_receive_resultant_resistance(T, s - (1/T[i]), i + 1, d + 1) or 
+            can_receive_resultant_resistance(T, s, i + 1, d))
     
 T = [4, 4, 4, 4, 5, 6, 7, 8, 9]
-print(can_obtain_resultant_resistance(T, 19))
+print(can_receive_resultant_resistance(T, 19))
 
 T = [4, 4, 2, 2, 5, 6, 7, 1, 9]
-print(can_obtain_resultant_resistance(T, 2))
+print(can_receive_resultant_resistance(T, 2))
 
 T = [4, 4, 2, 2, 5, 6, 7, 6, 9]
-print(can_obtain_resultant_resistance(T, 5))
+print(can_receive_resultant_resistance(T, 5))
 
 T = [4, 4, 4, 4, 5, 6, 7, 8, 9]
-print(can_obtain_resultant_resistance(T, 4))
+print(can_receive_resultant_resistance(T, 4))
 
 T = [4, 4, 4, 4, 5, 6, 7, 8, 9]
-print(can_obtain_resultant_resistance(T, 23))
+print(can_receive_resultant_resistance(T, 23))

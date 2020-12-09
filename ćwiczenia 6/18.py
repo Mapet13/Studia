@@ -9,20 +9,20 @@ Lewy górny narożnik ma współrzędne w=0 i k=0.
 Proszę napisać funkcję sprawdzającą czy król może dostać się z pola w,k do prawego dolnego narożnika.
 '''
 T = [
-    [12, 9,  9,  9,  9,  9,  9,  9],
-    [9,  12, 9,  9,  9,  9,  9,  9],
-    [9,  9,  12, 12, 9,  9,  9,  9],
-    [9,  9,  9,  9,  12, 12, 9,  9],
-    [9,  9,  9,  9,  9,  9,  12, 9],
-    [9,  9,  9,  9,  9,  9,  9,  12],
-    [9,  9,  9,  9,  9,  9,  9,  12],
-    [9,  9,  9,  9,  9,  9,  9,  12],
+    [32, 9,  9,  9,  9,  9,  9,  9],
+    [9,  32, 9,  9,  9,  9,  9,  9],
+    [9,  9,  32, 32, 9,  9,  9,  9],
+    [9,  9,  9,  9,  32, 32, 9,  9],
+    [9,  9,  9,  9,  9,  9,  32, 9],
+    [9,  9,  9,  9,  9,  9,  9,  32],
+    [9,  9,  9,  9,  9,  9,  9,  32],
+    [9,  9,  9,  9,  9,  9,  9,  32],
 ]
 
 def assert_first_digit(x, d):
     while x != x % 10:
         x //= 10
-    return x < d
+    return x > d
 
 def try_to_move_king(w, k):
     if w >= 8 or w < 0 or k < 0 or k >= 8:
