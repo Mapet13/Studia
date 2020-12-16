@@ -32,11 +32,20 @@ class Array:
         
         while current != None and current.index <= n:
             if current.index == n:
-                current.value = x
+                if x == 0: # wykreslanie jak value == default
+                    if prev == None:
+                        self.first = self.first.next
+                    else:
+                        prev.next = current.next
+                else:    
+                    current.value = x
                 return
             
             prev = current
             current = current.next
+
+        if x == 0:
+            return
 
         a = Node(x, n)
         if prev == None:
@@ -75,3 +84,9 @@ print(t.get(98))
 print(t.get(99))
 print(t.get(100))
 print(t.get(0))
+t.set(0, 0)
+t.set(123982197921987319872, 0)
+t.set(99, 0)
+t.set(101, 0)
+t.set(0, 0)
+test_print(t)
