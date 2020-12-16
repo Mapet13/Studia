@@ -6,76 +6,72 @@ Zastosowanie listy odsyłaczowej do implementacji tablicy rzadkiej. Proszę napi
 '''
 
 class Node:
-    def __init__(self):
-        self.value = None
+    def __init__(self, v, i):
+        self.value = v
+        self.index = i
         self.next = None
         
 class Array:
-    def __init__(self, N):
+    def __init__(self):
         self.first = None
-        
-        current = None
-        
-        if N > 0:
-            self.first = Node()
-            self.first.value = 0
-            current = self.first
-        
-        for _ in range(1, N):
-            current.next = Node()
-            current.next.value = 0
-            current = current.next
-        
-        self.last = current
         
     def get(self, n):
         current = self.first
         
-        for _ in range(0, n):
-            if current == None:
-                return None
-            current = current.next
-
-        if current == None:
-                return None
-        return current.value
-        
-    
-    def set(self, n, x):
-        current = self.first
-        
-        for _ in range(0, n):
-            if current == None:
-                return
+        while current != None and current.index <= n:
+            if current.index == n:
+                return current.value
             current = current.next
             
-        if current != None:
-            current.value = x
+        return 0      
+        
+        
+    def set(self, n, x):        
+        prev = None
+        current = self.first
+        
+        while current != None and current.index <= n:
+            if current.index == n:
+                current.value = x
+                return
+            
+            prev = current
+            current = current.next
+
+        a = Node(x, n)
+        if prev == None:
+            a.next = self.first
+            self.first = a
+        else:
+            a.next = current
+            prev.next = a
+        
         
 def test_print(s):
     a = s.first
     print("(", end=' ')
     while a != None:
-        print(a.value, end=' ')
+        print(f"[{a.index} -> {a.value}]", end=' ')
         a = a.next
     print(')')        
         
-t = Array(10)
-t0 = Array(0)
-test_print(t)
-test_print(t0)
-
-t.set(0, 1)
-test_print(t)
-        
-t.set(9, 1)
-test_print(t)
-
+t = Array()
+print(t.get(10181))
 print(t.get(0))
-print(t.get(1))
-print(t.get(9))
-print(t.get(10))
-
-t0.set(1, 1)
-test_print(t0)
-print(t0.get(0))
+print(t.get(999999999999))
+test_print(t)
+t.set(99, 1)
+t.set(0, 12)
+test_print(t)
+t.set(98, 1)
+t.set(99, 2)
+t.set(100, 3)
+t.set(0, 123)
+test_print(t)
+t.set(123982197921987319872, 1230)
+test_print(t)
+print(t.get(123982197921987319872))
+print(t.get(98))
+print(t.get(99))
+print(t.get(100))
+print(t.get(0))
