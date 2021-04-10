@@ -2,7 +2,11 @@ def knapsack(W, P, maxW):
     n = len(W)
     F = [[0]*(maxW + 1) for _ in range(n)]
     
-    for i in range(n):
+    for i in range(W[0], maxW + 1):
+        F[0][i] = P[0]
+    
+    
+    for i in range(1, n):
         for w in range(1, maxW + 1):
             F[i][w] = F[i-1][w]
             if w >= W[i]:
