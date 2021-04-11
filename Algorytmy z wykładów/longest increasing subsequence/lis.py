@@ -17,6 +17,6 @@ def print_solution(A, P, i):
     print(A[i])
     
 A = [13, 7, 21, 42, 8, 2, 44, 53]
-max_index = max(range(len(A)), key=A.__getitem__)
-_, _, P = lis(A)
+_, F, P = lis(A)
+max_index = max(range(len(F)), key=A.__getitem__)
 print_solution(A, P, max_index)
