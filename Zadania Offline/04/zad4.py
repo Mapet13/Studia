@@ -8,7 +8,7 @@ class Node:
     def __init__(self, next = None, val = None):
         self.next = next
         self.value = val
-        
+
 
 def lis(A):
     N = len(A)
@@ -32,25 +32,29 @@ def lis(A):
 
 def print_solution(A, P, Parents):
     
-    def recur(A, P, i):
-        if P[i] == None:
-           print(A[i], end=' ')
-           return True
-       
-        if recur(A, P, P[i].value):
-            P[i] = P[i].next
+    def recur(A, parent, i, arr = []):
+        arr = [A[i]] + arr
+        
+        if parent is None:
+            for j in range(len(arr)):
+                print(arr[j], end=" ") 
+            print()
             
-        print(A[i], end=' ')
-        return P[i] == None
+        while parent is not None:
+            recur(A, P[parent.value], parent.value, arr)
+            parent = parent.next
     
     while Parents != None:
-        i = Parents.value
-        if recur(A, P, i):
-            Parents = Parents.next
-        print()
+        recur(A, P[Parents.value], Parents.value)
+        Parents = Parents.next
 
         
-A = [13, 7, 21, 42, 8, 2, 44, 53]
+A = [10*k+i for k in range(8) for i in range(6,0,-1)]
+#print(len(A))
+#print(A)
+
+#A = [1, 2, 3, 5, 2, 3, 4]
+
 _, F, P = lis(A)
 
 parents = None
@@ -61,5 +65,5 @@ for i in range(len(A)):
     elif F[i] > current_best:
         parents = Node(None, i)
         current_best = F[i]
-        
+
 print_solution(A, P, parents)
