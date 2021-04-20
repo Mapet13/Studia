@@ -72,8 +72,11 @@ help:
 	@echo "\033[0;33mclean\033[m"
 	@echo "\033[0;33mmemcheck\033[m"
 
+$(OUT_FOLDER):
+	mkdir -p $@
+
 #link into exe
-$(EXECUTABLE): $(OBJECTS)
+$(EXECUTABLE): $(OUT_FOLDER) $(OBJECTS)
 	@echo "\033[0;32mEXECUTABLE:\033[m\033[0;34m $@\033[m"
 	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
 
