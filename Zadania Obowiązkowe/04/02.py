@@ -12,9 +12,10 @@ def f(T, target):
     i = 1
     while i < N and not F[i-1][target]:
         for t in range(target + 1):
-            F[i][t] = F[i-1][t]
-            if t >= T[i]:
-                F[i][t] = F[i][t] or F[i-1][t-T[i]] 
+            if t >= T[i]: # jezeli element i jest mniejszy od aktualnie sprawdzanej sumy (bo operujemy tylko na naturalnych)
+                F[i][t] = F[i-1][t] or F[i-1][t-T[i]] # rekurenycjnośc (F[i-1][t] lub F[i-1][t-T[i]])
+            else:
+                F[i][t] = F[i-1][t] # czy przedmioty do i-1 maja podciag sumujacy siie do t
         i += 1
         
     return F, F[i-1][target]
