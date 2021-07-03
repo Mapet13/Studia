@@ -1,0 +1,44 @@
+Zadanie 1. (Black Forest) Black Forest to las rosnący na osi liczbowej gdzieś w południowej Anglii. Las
+składa się z n drzew rosnących na pozycjach 0, . . . , n−1. Dla każdego i ∈ {0, . . . , n−1} znany jest zysk ci, 
+jaki można osiągnąć ścinając drzewo z pozycji i. John Lovenoses chce uzyskać maksymalny zysk ze ścinanych
+drzew, ale prawo zabrania ścinania dwóch drzew pod rząd. Proszę zaproponować algorytm, dzięki któremu
+John znajdzie optymalny plan wycinki.
+
+Zadanie 2. (spadające klocki) Każdy klocek to przedział postaci [a, b]. Dany jest ciąg klocków [a1, b1],
+[a2, b2], . . ., [an, bn]. Klocki spadają na oś liczbową w kolejności podanej w ciągu. Proszę zaproponować
+algorytm, który oblicza ile klocków należy usunąć z listy tak, zeby każdy kolejny spadajacy klocek mieścił
+się w całości w tam, który spadł tuż przed nim.
+
+Zadanie 3. (ładowanie promu) Dana jest tablica A[n] z długościami samochodów, które stoją w kolejce,
+żeby wjechać na prom. Prom ma dwa pasy (lewy i prawy), oba długości L. Proszę napisać program, który
+wyznacza, które samochody powinny pojechać na który pas, żeby na promie zmieściło się jak najwięcej aut.
+Auta muszą wjeżdżac w takiej kolejności, w jakiej są podane w tablicy A.
+
+Zadanie 4. (Głodna żaba) Pewna żaba skacze po osi liczbowej. Ma się dostać z zera do n − 1, skacząc
+wyłącznie w kierunku większych liczb. Skok z liczby i do liczby j (j > i) kosztuje ją j − i jednostek energii, a
+jej energia nigdy nie może spaść poniżej zera. Na początku żaba ma 0 jednostek energii, ale na szczęście na
+niektórych liczbach—także na zerze—leżą przekąski o określonej wartości energetycznej (wartość przekąki
+dodaje się do aktualnej energii Zbigniewa). Proszę zaproponować algorytm, który oblicza minimalną liczbę
+skoków potrzebną na dotarcie z 0 do n − 1 majać daną tablicę A z wartościami energetycznymi przekąsek na
+każdej z liczb.
+
+Zadanie 5 (dwuwymiarowy problem plecakowy) Proszę zaproponować algorytm dla dwuwymiarowej
+wersji dyskretnego problemu plecakowego. Mamy dany zbiór P = {p1, . . . , pn} przedmiotów i dla każdego
+przedmiotu pi dane sa nastepujace trzy liczby:
+1. v(pi) – wartość przedmiotu,
+2. w(pi) – waga przedmiotu, oraz
+3. h(pi) – wysokość przedmiotu.
+Złodziej chce wybrać przedmioty o maksymalnej wartości, których łączna waga nie przekracza danej liczby
+W oraz których łączna wysokość nie przekracza danej liczby H (przedmioty zapakowane są w kartony, które
+złodziej układa jeden na drugim). Proszę oszacować złozoność czasową swojego algorytmu oraz uzasadnić
+jego poprawność.
+
+Zadanie 6 (ścieżka w drzewie) Dane jest drzewo ukorzenione T, gdzie każdy wierzchołek v ma—
+potencjalnie ujemną—wartość value(v). Proszę zaproponować algorytm, który znajduje wartość najbardziej
+wartościowej ścieżki w drzewie T.
+
+Zadanie 7. (sklejanie odcinków) Dany jest ciąg przedziałów postaci [ai, bi]. Dwa przedziały można
+skleić jeśli mają dokładnie jeden punkt wspólny. Proszę wskazać algorytmy dla następujących problemów:
+1. Problem stwierdzenia, czy da się uzyskąć przedział [a, b] przez sklejanie odcinków.
+2. Zadanie jak wyżej, ale każdy odcinek ma koszt i pytamy o minimalny koszt uzyskania odcinka [a, b].
+3. Problem stwierdzenia jaki najdłuższy odcinek można uzyskać sklejając najwyżej k odcinków.

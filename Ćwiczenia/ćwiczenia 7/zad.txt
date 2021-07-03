@@ -1,0 +1,13 @@
+zad2:
+    1) sortuje malejąco
+    2) dla kazdego zadania:
+        - szukam najpoznijeszego wolnego terminu ktory miesci sie w deadline
+        - jesli nie znajde to ignoruje to zadanie
+
+poprawnosc:
+    ozakladam ze algo nie jest poprawne.
+    czyli w jakims momencie zignorowalismy prace bo jej sie nie dalo dodac bo wszytskie terminy zostaly wczensije zajete.
+    gdybysmy to zadanie podmienili z tzmtym to zestaw zajetych przedzialow byl by dalej taki sam ale zminienjszyl by sie profit.
+    zatem mamy sprzecznosc
+    ergo algorytm jest poprawny
+
