@@ -20,3 +20,4 @@
  * [Data base](https://github.com/Mapet13/PBD_projekt)
  * [SPO graph transformations visualisation](https://github.com/TrifleMichael/BestTiagProjectEver)
  * [FEM solution for Gravitational potential equation](https://github.com/Mapet13/FEM)   
+ * [Pokemon stats analysis (in polish)](https://github.com/Mapet13/Studia/tree/RPIS/Project)
