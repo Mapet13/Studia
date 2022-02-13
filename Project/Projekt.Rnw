@@ -1,0 +1,240 @@
+\documentclass{article}
+  
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{polski}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{Sweave}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{titling}
+\usepackage[margin=1in]{geometry}
+
+\setlength{\droptitle}{-10em}
+
+<<echo=FALSE>>==
+library(magrittr)
+library(dplyr) 
+library(ggplot2)
+library(forcats)
+library(ggpubr)
+library(tidyr)
+library(qqplotr)
+library(tibble)
+library(ggalt)
+library(ggfortify)
+
+
+pokemony <- read.csv("Pokemon.csv",header=T)
+colnames(pokemony) <- c('#','Name','Type 1','Type 2','Total','HP','Attack','Defense','Sp. Atk','Sp. Def','Speed','Generation','Legendary')
+
+pokemon_count <- nrow(pokemony)
+
+by_type <- pokemony %>% select("#", "Type 1", "Total")
+colnames(by_type) <- c('#', 'Type', 'Total')
+for(i in 1:pokemon_count) {
+  if(pokemony[i, "Type 2"] != "") {
+    by_type[nrow(by_type) + 1,] = list(pokemony[i, '#'],pokemony[i, 'Type 2'], pokemony[i, 'Total'])
+  }
+}
+
+@
+
+<<label=pokeball,fig=TRUE, width=6, height=0.9, echo=False, include=FALSE>>==
+  pokeball <- data.frame(
+  t=c(1,1,2,2),
+  group=c('a', 'x', 'b', 'b'),
+  value=c(1, 1, 1, 1)
+) 
+
+ggplot(pokeball, aes(x=value, y="", fill=group, colour=group)) +
+  geom_bar(data=pokeball[pokeball$t==2,], stat="identity", width=1.3) + 
+  geom_bar(data=pokeball[pokeball$t==1,], stat="identity", width=1, size=0.5) +
+  coord_polar(theta = "x", start=pi/2) +
+  theme_void() +
+  theme(legend.position="none") +
+  scale_fill_manual(values = c('a'='red', 'b'='white', 'x'='white')) +
+  scale_color_manual(values = c('a'='black', 'b'='white', 'x'='black'))
+
+@
+
+<<label=wykres_legendy,fig=TRUE, width=6, height=2.5, echo=False, include=FALSE>>==
+a_to_d = pokemony %>% ggplot(aes(Attack, Defense, colour=Legendary)) +  
+  guides(size="none") + 
+  theme(legend.position = "top") +
+  geom_point(aes(shape=Legendary)) + 
+  geom_encircle(data = pokemony[pokemony$Legendary == 'True',], aes(x=Attack, y=Defense))
+
+total_legendary = pokemony %>% ggplot(aes(x=Legendary, y=`Total`, fill=Legendary)) + 
+  geom_violin() 
+
+ggarrange(total_legendary, a_to_d, common.legend=TRUE)
+@
+
+<<label=wykresy_cech,fig=TRUE, width=6,height=3.6, echo=False, include=FALSE>>==
+pokemony_cecha <- gather(pokemony, key="cecha", value="value", c("HP", 'Attack','Defense','Sp. Atk','Sp. Def','Speed'))
+
+
+getlabel <- function(name) {
+  results <- shapiro.test(pokemony[[name]])
+  return(capture.output(cat("W=", results$statistic, "  p=", results$p.value)))
+}
+
+
+pokemony_cecha %>% ggplot(mapping = aes(sample = value, color = cecha, fill = cecha)) +
+  stat_qq_band(alpha=0.3) +
+  stat_qq_line() +
+  stat_qq_point(size=0.8) +
+  theme(strip.text = element_text(size=5.5)) +
+  facet_wrap(~cecha, ncol=3, labeller = labeller(cecha=c(
+    "HP" = getlabel("HP"), "Attack" = getlabel("Attack"), "Defense" = getlabel("Defense"),   
+    "Sp. Atk" = getlabel("Sp. Atk"), "Sp. Def" = getlabel("Sp. Def"), "Speed" = getlabel("Speed"))))
+
+@
+
+<<label=wykres_Total,fig=TRUE, width=6,echo=False, include=FALSE>>==
+pokemony %>%
+  ggplot(aes(`Total`)) + 
+  geom_histogram(binwidth = 10)
+@
+
+<<label=wykres_typy_a_sila,fig=TRUE, width=6,height=4.7,echo=False, include=FALSE>>==
+by_type %>% 
+  ggplot(aes(x=`Type`, y=`Total`, colour =`Type`)) + 
+  geom_boxplot() + 
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+@
+
+<<label=wykres_typy_a_norm_total,fig=TRUE,width=6, height=3.6,echo=False, include=FALSE>>==
+typy_nazwy <- unique(by_type[["Type"]])
+typy_test_text <- data.frame(label=character(), Type=character(), Total=numeric())
+
+getlabelTest <- function(typ) {
+  with_type <- by_type[by_type$"Type" == typ, ]
+  results <- shapiro.test(with_type[['Total']])
+  return(capture.output(cat("W=", results$statistic, "  p=", results$p.value)))
+}
+
+for (typ in typy_nazwy) {
+  typy_test_text[nrow(typy_test_text) + 1,] = list(getlabelTest(typ), typ, 10)
+}
+
+
+
+by_type %>% ggplot(mapping = aes(sample = Total, color = Type, fill = Type)) +
+  stat_qq_band(alpha=0.3) +
+  stat_qq_line(size=0.6) +
+  stat_qq_point(size=0.4, colour="Black") +
+  theme(legend.position = "none",
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank()) +
+  facet_wrap(. ~ Type, ncol=6) +
+  geom_text(
+    data=typy_test_text,
+    mapping=aes(x=-Inf, y = -Inf, label=label),
+    hjust   = 0.0,
+    vjust   = -0.4,
+    color = "Black",
+    size = 1.58
+  )
+@
+
+
+\title{Analiza statystyk Pokemonów}
+\author{\textbf{406510, Jakub Sordyl}, czwartek $11^{30}$\\ 
+\textit{AGH, Wydział Informatyki Elektroniki i Telekomunikacji}\\
+\textit{Rachunek prawdopodobieństwa i statystyka 2020/2021}}
+\date{Kraków, \today}
+
+\begin{document}
+\maketitle
+
+\textit{Ja, niżej podpisany(na) własnoręcznym podpisem deklaruję, że przygotowałem(łam) przedstawiony do oceny projekt samodzielnie i żadna jego część nie jest kopią pracy innej osoby.}
+\begin{flushright}
+{.............Jakub Sordyl...................}
+\end{flushright}
+
+\section{Streszczenie raportu}
+Raport powstał w oparciu o analizę danych dotyczących statystyk pokemonów z gier.
+
+\includegraphics[width=1\textwidth]{Projekt-pokeball}
+
+\section{Opis danych}
+Dane do projektu pochodzą ze strony \href{url}{\texttt{https://www.kaggle.com/abcsds/pokemon}}. Zostało opisane 800 pokeomnów. Dla każdego pokemona zostały opisane poniższe cechy:
+\begin{itemize}
+    \item \textbf{\#}: ID pokemona
+    \item \textbf{Name}: Nazwa Pokemona
+    \item \textbf{Type 1}: Każdy pokemon ma swój typ (np: Ognisty, Ziemny, Normalny)
+    \item \textbf{Type 2}: Czasem pokemon ma dwa typy i tu jest on zaznaczony
+    \item \textbf{Total}: Suma wszystkich statystyk (czyli miara tego jak silny jest pokemon w ogólności)
+    \item \textbf{HP}: Punkty życia pokemona informujące ile maksymalnie obrażeń może dostać
+    \item \textbf{Attack}: Podstawowy modyfikator do zwykłych ataków
+    \item \textbf{Defense}: Podstawowa odporność na zwykłe ataki
+    \item \textbf{SP Atk}: Modyfikator na specjalne ataki
+    \item \textbf{SP Def}: Modyfikator obrony przeciw specjalnym atakom
+    \item \textbf{Speed}: Określa który pokemon wykonuje pierwszy akcję
+\end{itemize}
+Dane są kompletne i nie wymagają oczyszczania. Jedynym problemem może być kolumna \textbf{Type 2} która jest pusta dla niektórych pokemonów. Przy analizie w której jedną z badanych cech był typ pokemona, przetworzyłem dane w taki sposób, że każdy rekord pokemona dwu-typowego rozdzieliłem na 2, z osobnymi typami. 
+
+\section{Analiza danych}
+
+Dla tesowania czy dane pochodzą z rozkładu normalnego zostal uzyty test Shapiro-Wilka którego wyniki zostały dopisane do Q-QPlotów.
+\subsection{Wydobywanie podstawowych informacji z danych}
+
+Sprawdzmy czy liczebność pokemonów i och cech zgadza się z poprzednim opisem:
+<<>>==
+dim(pokemony)
+@
+
+Zbadajmy wartość korelacji między niektórymi cechami:
+<<>>==
+cor(pokemony$HP, pokemony$Defense)
+cor(pokemony$Attack, pokemony$`Sp. Atk`)
+cor(pokemony$Defense, pokemony$`Sp. Def`)
+cor(pokemony$Defense, pokemony$Attack)
+@ 
+Najbardziej powiązane ze sobą są cechy Defense i Sp. Def, co ciekawe powiązanie po miedzy analogicznymi cechami dla ataku jest dyzo mniejsze.
+\newline \hfill \break
+Zobaczmy jeszcze jak wygląda rozkład siły pokemonów:
+<<>>==
+summary(fivenum(pokemony[['Total']]))
+@
+
+
+\subsection{Sprawdzmy czy w dla poszczególnych typów rozkład siły pokemona jest rozkładem normalnym}
+\includegraphics[width=1\textwidth]{Projekt-wykres_typy_a_norm_total}
+
+\subsection{Pokemony Legendarne}
+\includegraphics[width=1\textwidth, page=2]{Projekt-wykres_legendy}
+
+
+Widać tutaj że pokemony legendarne znacznie przewyższają siła zwykłe pokemony. Co więcej nie ma pokemonów legendarnych mających mniej niż 580 punktów siły! Widać to również na wykresie po prawej stronie. Nawet jak pokemon Legendarny ma jakąś słabszą cechę to inne to rekompensują. Tutaj widać przykład pokemona mającego mniej niż 25 punktów obrony ale aż, ponad 175 ataku (odstający punkt w prawym dolnym rogu). 
+
+\subsection{Sprawdzmy czy cechy pochodzą z rozkładu normalnego}
+
+\includegraphics[width=1\textwidth]{Projekt-wykresy_cech}
+Musimy odrzucić hipotezę że rozkłady cech pochodzą z rozkładu normalnego. Aby przejść test p-value musiała by mieć wartość większą niż 5\%. Tutaj te wartości są dużo niższe.
+
+
+\subsection{Zaleznośc między typem a ogólną siłą pokemona}
+\includegraphics[width=1\textwidth]{Projekt-wykres_typy_a_sila}
+
+Od reszty odbiegają pokemony typu Dragon. Ich mediana jest na poziomie aż 600 (średnia 545). Warto wspomnieć że jednym z pokemonów mających największą siłe jest właśnie pokemon typu Dragon (Rayquaza).  Interesujący również jest wykres dla pokemonów ognistych które mimo średniego rozłożenia około 500 siły posiadają jednego z potężniejszych pokemonów (Groudon) mającego aż 770 punktów. 
+
+
+\section{Wnioski}
+Wnioski płynące z przeprowadzonej analizy, są następujące:
+\begin{itemize}
+\item Pokemonów typu Dragon jest stosunkowo mało jednak widać że są średnio dużo potężniejsze od innych pokemonów.
+\item Mimo że pokemony ogniste średnio nie są bardzo potężne to posiadają jednego z najsilniejszych pokemonów.
+\item Musimy odrzucić hipotezę ze rozkłady cech pokemonów pochodzą z rozkładu normalnego.
+\item Dla typów Bug, Dragon, Gosth, Grass, Normal, Psychic, Rock i Water musimy odrzucić hipotezę ze rozkład ich ogólnej siły pochodzi z rozkładu normalnego.
+\item Pokemony Legendarne nie bez powodu są legendarne, swoją siłą przewyższają większość pokemonów.
+\end{itemize}
+
+\end{document}
