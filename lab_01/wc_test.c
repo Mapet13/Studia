@@ -1,5 +1,3 @@
-#define DYNAMIC
-
 #ifdef DYNAMIC
 #include "wc_dynamic_defs.h"
 #else
@@ -12,9 +10,23 @@
 
 #ifdef DYNAMIC
 #include <dlfcn.h>
+
+#ifndef LIB_PATH 
+#error "YOU HAVE TO PASS DYNAMIC 'LIB_PATH' DEFINE!"
+#endif
+
 #endif
 
 #define INPUT_SIZE 256
+
+#define LOG \
+    log__(stdout, __FILE__, __LINE__)
+
+void log__(FILE* fd, char* file, int line)
+{
+    fprintf(fd,"%s:%d\n", file, line);
+}
+    
 
 typedef enum {
     invalid,
@@ -38,8 +50,8 @@ void *g_handle;
 #endif
 
 int main(void) {
-    #ifdef DYNAMIC
-    g_handle = dlopen("libwc_dynamic.so", RTLD_LAZY);
+    #ifdef DYNAMIC    
+    g_handle = dlopen(TOSTRING(LIB_PATH), RTLD_LAZY);
     if(!g_handle) puts("ERROR WHILE LOADING LIBARY");
 
     if(dlerror() != NULL) puts("ERROR WITH LIBARY");
@@ -113,6 +125,9 @@ void create_table_action(const char* argument, ArrayWC* array) {
     #ifdef DYNAMIC
     LOAD_DYNAMIC_FN(g_handle, wc_array_create, ArrayWC, size_t);
     LOAD_DYNAMIC_FN(g_handle, wc_array_destroy, void, ArrayWC*);
+
+    if(wc_array_create == NULL) 
+        LOG;
     #endif
 
     if(array->data != NULL)

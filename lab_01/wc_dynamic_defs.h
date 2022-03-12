@@ -7,6 +7,8 @@ typedef struct {
     ID_type size;
 } ArrayWC;
 
-#define LOAD_DYNAMIC_FN(handle, fn, out, ...) out (*fn)(__VA_ARGS__) = (out (*)(__VA_ARGS__))dlsym((handle),"fn")
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+#define LOAD_DYNAMIC_FN(handle, fn, out, ...) out (*fn)(__VA_ARGS__) = (out (*)(__VA_ARGS__))dlsym((handle),TOSTRING(fn))
 
 #endif

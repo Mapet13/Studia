@@ -4,12 +4,6 @@
 #include <stddef.h>
 #include <stdio.h>
 
-#define LOG \
-    log__(stdout, __FILE__, __LINE__)
-
-void log__(FILE* fd, char* file, int line);
-
-
 typedef unsigned ID_type;
 typedef struct {
     char** data;

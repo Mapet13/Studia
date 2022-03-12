@@ -4,12 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-void log__(FILE* fd, char* file, int line)
-{
-    fprintf(fd,"%s:%d\n", file, line);
-}
-
-
 // ----UTILITIES--------------------------
 ID_type find_first_free_id(ArrayWC* array);
 char* read_whole_file(const char* file_name);
@@ -58,6 +52,7 @@ void wc_array_remove(ArrayWC* array, ID_type id) {
         return;
 
     free(array->data[id]);
+    array->data[id] = NULL;
 }
 
 // ----UTILITIES--------------------------

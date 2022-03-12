@@ -3,12 +3,12 @@ ifndef VERBOSE
 .SILENT:
 endif
 
-DEFAULT_LINKING := shared
+DEFAULT_LINKING := static
 
 #Vars
 CC         := gcc
 AR         := ar crs
-CFLAGS     := -c -std=gnu11 -Wall 
+CFLAGS     := -c -std=gnu11 -Wall
 
 INC_DIR    := 
 LDFLAGS    := 
@@ -22,12 +22,16 @@ EXE_NAME   := wc_test
 LIB_SRC    := wc_lib.c
 LIB_NAME   := wc
 
-LIB_OBJECTS    := $(LIB_SRC:%.c=$(OBJ_DIR)/%.o)
+LIB_OBJECTS_STATIC    := $(LIB_SRC:%.c=$(OBJ_DIR)/STATIC/%.o)
+LIB_OBJECTS_SHARED    := $(LIB_SRC:%.c=$(OBJ_DIR)/SHARED/%.o)
+LIB_OBJECTS_DYNAMIC   := $(LIB_SRC:%.c=$(OBJ_DIR)/DYNAMIC/%.o)
 STATIC_LIB_FILE := $(OUT_FOLDER)/lib$(LIB_NAME).a
 DYNAMIC_LIB_FILE := $(OUT_FOLDER)/lib$(LIB_NAME)_dynamic.so
 SHARED_LIB_FILE := $(OUT_FOLDER)/lib$(LIB_NAME)_shared.so
 
-OBJECTS := $(SRC:%.c=$(OBJ_DIR)/%.o)
+OBJECTS_STATIC := $(SRC:%.c=$(OBJ_DIR)/STATIC/%.o)
+OBJECTS_SHARED := $(SRC:%.c=$(OBJ_DIR)/SHARED/%.o)
+OBJECTS_DYNAMIC := $(SRC:%.c=$(OBJ_DIR)/DYNAMIC/%.o)
 EXECUTABLE := $(OUT_FOLDER)/$(EXE_NAME)
 EXECUTABLE_STATIC := $(EXECUTABLE)_static
 EXECUTABLE_DYNAMIC := $(EXECUTABLE)_dynamic
@@ -42,9 +46,11 @@ else
 		DEFAULT_LINKING_LIB_RULE = dynamic_lib
 endif
 
-
 .PHONY: default
-default: $(LIB_SRC) $(DEFAULT_LINKING_LIB_RULE) $(DEFAULT_LINKING)
+default: $(DEFAULT_LINKING_LIB_RULE) $(DEFAULT_LINKING)
+
+.PHONY: all
+all: clean static shared dynamic
 
 .PHONY: static
 static: $(SRC) $(EXECUTABLE_STATIC)
@@ -56,13 +62,13 @@ dynamic: $(SRC) $(EXECUTABLE_DYNAMIC)
 shared: $(SRC) $(EXECUTABLE_SHARED)
 
 .PHONY: static_lib
-static_lib: $(STATIC_LIB_FILE)
+static_lib: $(LIB_SRC) $(STATIC_LIB_FILE)
 
 .PHONY: dynamic_lib
-dynamic_lib: $(DYNAMIC_LIB_FILE)
+dynamic_lib: $(LIB_SRC) $(DYNAMIC_LIB_FILE)
 
 .PHONY: shared_lib
-shared_lib: $(SHARED_LIB_FILE)
+shared_lib: $(LIB_SRC) $(SHARED_LIB_FILE)
 
 .PHONY: clean
 clean:
@@ -85,32 +91,43 @@ help:
 $(OUT_FOLDER):
 	mkdir -p $@
 
-$(STATIC_LIB_FILE): $(OUT_FOLDER) $(LIB_OBJECTS)
+$(STATIC_LIB_FILE): $(OUT_FOLDER) $(LIB_OBJECTS_STATIC)
 	@echo "STATIC LIBARY: $@"
-	$(AR) $@ $(LIB_OBJECTS)
+	$(AR) $@ $(LIB_OBJECTS_STATIC)
 
-$(DYNAMIC_LIB_FILE): $(OUT_FOLDER) $(LIB_OBJECTS)
+$(DYNAMIC_LIB_FILE): $(OUT_FOLDER) $(LIB_OBJECTS_DYNAMIC)
 	@echo "DYNAMIC LIBARY: $@"
-	$(CC) -fPIC -o $@ $(LIB_OBJECTS) -shared  
+	$(CC) -fPIC -o $@ $(LIB_OBJECTS_DYNAMIC) -shared  
 
-$(SHARED_LIB_FILE): $(OUT_FOLDER) $(LIB_OBJECTS)
+$(SHARED_LIB_FILE): $(OUT_FOLDER) $(LIB_OBJECTS_SHARED)
 	@echo "SHARED LIBARY: $@"
-	$(CC) -fPIC -o $@ $(LIB_OBJECTS) -shared  
+	$(CC) -fPIC -o $@ $(LIB_OBJECTS_SHARED) -shared  
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/SHARED/%.o: %.c
 	@echo "Compiling: $<"
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INC_DIR) $< -o $@
 
-$(EXECUTABLE_STATIC): $(STATIC_LIB_FILE) $(OUT_FOLDER) $(OBJECTS)
+$(OBJ_DIR)/STATIC/%.o: %.c
+	@echo "Compiling: $<"
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(INC_DIR) $< -o $@
+
+$(OBJ_DIR)/DYNAMIC/%.o: %.c
+	@echo "Compiling: $<"
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -DDYNAMIC -DLIB_PATH=$(DYNAMIC_LIB_FILE) $(INC_DIR) $< -o $@
+
+
+$(EXECUTABLE_STATIC): $(STATIC_LIB_FILE) $(OUT_FOLDER) $(OBJECTS_STATIC)
 	@echo "ECUTABLE: $@"
-	$(CC) $(OBJECTS) $(LDFLAGS) -o $@ $(STATIC_LIB_FILE)
+	$(CC) $(OBJECTS_STATIC) $(LDFLAGS) -o $@ $(STATIC_LIB_FILE)
 
 	
-$(EXECUTABLE_SHARED): $(SHARED_LIB_FILE) $(OUT_FOLDER) $(OBJECTS)
+$(EXECUTABLE_SHARED): $(SHARED_LIB_FILE) $(OUT_FOLDER) $(OBJECTS_SHARED)
 	@echo "ECUTABLE: $@"
-	$(CC) $(OBJECTS) $(LDFLAGS) -o $@ $(SHARED_LIB_FILE)
+	$(CC) $(OBJECTS_SHARED) $(LDFLAGS) -o $@ $(SHARED_LIB_FILE)
 
-$(EXECUTABLE_DYNAMIC): $(DYNAMIC_LIB_FILE) $(OUT_FOLDER) $(OBJECTS)
+$(EXECUTABLE_DYNAMIC): $(DYNAMIC_LIB_FILE) $(OUT_FOLDER) $(OBJECTS_DYNAMIC)
 	@echo "ECUTABLE: $@"
-	$(CC) $(OBJECTS) $(LDFLAGS) -ldl -o $@
+	$(CC) $(OBJECTS_DYNAMIC) $(LDFLAGS) -ldl -o $@
