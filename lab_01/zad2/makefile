@@ -5,11 +5,10 @@ endif
 
 #Vars
 CC         := gcc
-AR         := ar crs
 CFLAGS     := -c -std=gnu11 -Wall
 
 INC_DIR    := 
-LDFLAGS    := -lm
+LDFLAGS    :=
 
 OUT_FOLDER := out
 OBJ_DIR    := obj

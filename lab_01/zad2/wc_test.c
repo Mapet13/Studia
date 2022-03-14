@@ -9,13 +9,6 @@
 
 #define INPUT_SIZE 256
 
-#define LOG \
-    log__(stdout, __FILE__, __LINE__)
-
-void log__(FILE* fd, char* file, int line) {
-    fprintf(fd, "%s:%d\n", file, line);
-}
-
 typedef enum {
     invalid,
     create_table,
@@ -31,13 +24,19 @@ typedef struct {
 
 static struct tms g_tms;
 static clock_t g_time;
+static FILE* g_timer_output;
 
 CommandDesc read_command(void);
 void execute_command(CommandDesc, ArrayWC*);
 void timer_start(void);
-void timer_check(void);
+void timer_check(CommandDesc);
+const char* get_command_name(CommandType command);
 
 int main(void) {
+    g_timer_output = fopen("timer_result.txt", "w+");
+    if (g_timer_output == NULL)
+        puts("ERROR WITH CREATING OUTPUT FILE");
+
     ArrayWC* context = malloc(sizeof(context));
 
     while (1) {
@@ -59,13 +58,13 @@ CommandType parse_command_type(void) {
     char command_in[INPUT_SIZE];
     scanf("%s", command_in);
 
-    if (strcmp(command_in, "create_table") == 0) {
+    if (strcmp(command_in, get_command_name(create_table)) == 0) {
         return create_table;
-    } else if (strcmp(command_in, "wc_files") == 0) {
+    } else if (strcmp(command_in, get_command_name(wc_files)) == 0) {
         return wc_files;
-    } else if (strcmp(command_in, "remove_block") == 0) {
+    } else if (strcmp(command_in, get_command_name(remove_block)) == 0) {
         return remove_block;
-    } else if (strcmp(command_in, "print") == 0) {
+    } else if (strcmp(command_in, get_command_name(print)) == 0) {
         return print;
     } else {
         return invalid;
@@ -90,8 +89,8 @@ CommandDesc read_command(void) {
     return command;
 }
 
-void create_table_action(const char* argument, ArrayWC* array) {
-    const size_t size = atoi(argument);
+void create_table_action(CommandDesc command, ArrayWC* array) {
+    const size_t size = atoi(command.arguments);
 
     if (size == 0) {
         puts("WRONG ARGUMENT!");
@@ -103,7 +102,7 @@ void create_table_action(const char* argument, ArrayWC* array) {
 
     timer_start();
     ArrayWC result = wc_array_create(size);
-    timer_check();
+    timer_check(command);
 
     array->data = result.data;
     array->size = result.size;
@@ -112,14 +111,14 @@ void create_table_action(const char* argument, ArrayWC* array) {
         puts("ERROR OCCURES WHILE CREATING TABLE!");
 }
 
-void wc_files_action(const char* argument, ArrayWC* array) {
+void wc_files_action(CommandDesc command, ArrayWC* array) {
     timer_start();
-    wc_array_read(array, argument);
-    timer_check();
+    wc_array_read(array, command.arguments);
+    timer_check(command);
 }
 
 int read_id(ID_type* id, const char* argument) {
-    if (strcmp(argument, "0")) {
+    if (strcmp(argument, "0") == 0) {
         *id = 0;
     } else {
         *id = atoi(argument);
@@ -132,16 +131,16 @@ int read_id(ID_type* id, const char* argument) {
     return 0;
 }
 
-void remove_block_action(const char* argument, ArrayWC* array) {
+void remove_block_action(CommandDesc command, ArrayWC* array) {
     ID_type id;
 
-    if (read_id(&id, argument) == -1) {
+    if (read_id(&id, command.arguments) == -1) {
         return;
     }
 
     timer_start();
     wc_array_remove(array, id);
-    timer_check();
+    timer_check(command);
 }
 
 void print_action(ArrayWC* array) {
@@ -155,19 +154,20 @@ void print_action(ArrayWC* array) {
 void execute_command(CommandDesc command, ArrayWC* array) {
     switch (command.type) {
         case create_table: {
-            create_table_action(command.arguments, array);
+            create_table_action(command, array);
             break;
         }
         case wc_files: {
-            wc_files_action(command.arguments, array);
+            wc_files_action(command, array);
             break;
         }
         case remove_block: {
-            remove_block_action(command.arguments, array);
+            remove_block_action(command, array);
             break;
         }
         case print: {
             print_action(array);
+            break;
         }
         default: {
         }
@@ -182,11 +182,40 @@ double get_time_diff(clock_t start, clock_t end) {
     return (double)(end - start) / (double)sysconf(_SC_CLK_TCK);
 }
 
-void timer_check(void) {
+void write_timer_results(FILE* out, CommandDesc command, double real, double user, double sys) {
+    fprintf(out, "----------------------------------\n");
+    fprintf(out, "Command: %s %s \n", get_command_name(command.type), command.arguments);
+    fprintf(out, "Time Real: %f\n", real);
+    fprintf(out, "Time User: %f\n", user);
+    fprintf(out, "Time Sys: %f\n", sys);
+    fprintf(out, "----------------------------------\n");
+}
+
+void timer_check(CommandDesc command) {
     struct tms tms_now;
     clock_t time_end = times(&tms_now);
 
-    printf("Time Real: %f\n", get_time_diff(g_time, time_end));
-    printf("Time User: %f\n", get_time_diff(g_tms.tms_utime, tms_now.tms_utime));
-    printf("Time Sys: %f\n", get_time_diff(g_tms.tms_stime, tms_now.tms_stime));
+    double real = get_time_diff(g_time, time_end);
+    double user = get_time_diff(g_tms.tms_utime, tms_now.tms_utime);
+    double sys = get_time_diff(g_tms.tms_stime, tms_now.tms_stime);
+
+    write_timer_results(stdout, command, real, user, sys);
+
+    if (g_timer_output != NULL)
+        write_timer_results(g_timer_output, command, real, user, sys);
+}
+
+const char* get_command_name(CommandType command) {
+    switch (command) {
+        case create_table:
+            return "create_table";
+        case wc_files:
+            return "wc_files";
+        case remove_block:
+            return "remove_block";
+        case print:
+            return "print";
+        default:
+            return "";
+    }
 }

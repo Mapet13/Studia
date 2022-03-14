@@ -1,0 +1,42 @@
+----------------------------------
+Command: create_table  20 
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files  test_files/small 
+Time Real: 0.010000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files  test_files/medium 
+Time Real: 0.130000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files  test_files/large 
+Time Real: 0.590000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files  test_files/large test_files/medium test_files/small 
+Time Real: 0.780000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files  test_files/medium test_files/medium2 test_files/medium3 test_files/medium4 test_files/medium5 test_files/medium6 test_files/medium7 test_files/medium8 test_files/medium9 
+Time Real: 1.070000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: remove_block  3 
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
