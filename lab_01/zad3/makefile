@@ -1,7 +1,7 @@
 #remove all default echoes
-ifndef VERBOSE
-.SILENT:
-endif
+# ifndef VERBOSE
+# .SILENT:
+# endif
 
 DEFAULT_LINKING := static
 
@@ -46,6 +46,7 @@ else
 		DEFAULT_LINKING_LIB_RULE = dynamic_lib
 endif
 
+
 .PHONY: default
 default: $(DEFAULT_LINKING_LIB_RULE) $(DEFAULT_LINKING)
 
@@ -60,6 +61,32 @@ dynamic: $(SRC) $(EXECUTABLE_DYNAMIC)
 
 .PHONY: shared
 shared: $(SRC) $(EXECUTABLE_SHARED)
+
+add_o1:
+	$(eval CFLAGS += -O1)
+	@echo "adding -O1 flag"
+
+add_os:
+	$(eval CFLAGS += -Os)
+	@echo "adding -Os flag"
+
+.PHONY: static_O1
+static_O1: add_o1 $(SRC) $(EXECUTABLE_STATIC)
+
+.PHONY: dynamic_O1
+dynamic_O1: add_o1 $(SRC) $(EXECUTABLE_DYNAMIC)
+
+.PHONY: shared_O1
+shared_O1: add_o1 $(SRC) $(EXECUTABLE_SHARED)
+
+.PHONY: static_Os
+static_Os: add_os $(SRC) $(EXECUTABLE_STATIC)
+
+.PHONY: dynamic_Os
+dynamic_Os: add_os $(SRC) $(EXECUTABLE_DYNAMIC)
+
+.PHONY: shared_0s
+shared_0s: add_os $(SRC) $(EXECUTABLE_SHARED)
 
 .PHONY: static_lib
 static_lib: $(LIB_SRC) $(STATIC_LIB_FILE)

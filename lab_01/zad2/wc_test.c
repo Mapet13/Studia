@@ -37,7 +37,7 @@ int main(void) {
     if (g_timer_output == NULL)
         puts("ERROR WITH CREATING OUTPUT FILE");
 
-    ArrayWC* context = malloc(sizeof(context));
+    ArrayWC* context = malloc(sizeof(*context));
 
     while (1) {
         printf(">>> ");
