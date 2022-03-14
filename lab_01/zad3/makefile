@@ -107,13 +107,20 @@ clean:
 	-rm -f -r $(EXECUTABLE_DYNAMIC)
 	-rm -f -r $(EXECUTABLE_STATIC)
 
-.PHONY: run_static
-run_static: static
-#TODO
-
 .PHONY: help
 help:
-#TODO 
+	@echo "make \t\t - build test app with default (static) linked lib"
+	@echo "make all \t - clean and all variations of test app"
+	@echo "make clean \t - clear all outputed files"
+	@echo "make static \t - build test app with static linked lib"
+	@echo "make shared \t - build test app with shared linked lib"
+	@echo "make dynamic \t - build test app with dynamic linked lib"
+	@echo "make static_O1 \t - build test app with static linked lib with -O1"
+	@echo "make shared_O1 \t - build test app with shared linked lib with -O1"
+	@echo "make dynamic_O1  - build test app with dynamic linked lib with -O1"
+	@echo "make static_Os \t - build test app with static linked lib with -Os"
+	@echo "make shared_Os \t - build test app with shared linked lib with -Os"
+	@echo "make dynamic_Os  - build test app with dynamic linked lib with -Os"
 
 $(OUT_FOLDER):
 	mkdir -p $@

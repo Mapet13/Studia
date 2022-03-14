@@ -9,7 +9,7 @@ AR         := ar crs
 CFLAGS     := -c -std=gnu11 -Wall 
 
 INC_DIR    := 
-LDFLAGS    := -lm
+LDFLAGS    := 
 
 OUT_FOLDER := out
 OBJ_DIR    := obj
@@ -42,12 +42,11 @@ clean:
 
 .PHONY: help
 help:
-	@echo "make \t\t - build static and dynamic lib"
-	@echo "make all \t - clean and then build static and dynamic lib"
+	@echo "make \t\t - build static and shared lib"
+	@echo "make all \t - clean and then build static and shared lib"
 	@echo "make static \t - build static lib"
 	@echo "make shared \t - build shared lib"
 	@echo "make clean \t - clear all outputed files"
-#TODO 
 
 $(OUT_FOLDER):
 	mkdir -p $@

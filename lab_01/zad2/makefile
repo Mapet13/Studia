@@ -34,7 +34,9 @@ clean:
 
 .PHONY: help
 help:
-#TODO 
+	@echo "make \t\t - build test app"
+	@echo "make all \t - clean and then build test app"
+	@echo "make clean \t - clear all outputed files"
 
 $(OUT_FOLDER):
 	mkdir -p $@

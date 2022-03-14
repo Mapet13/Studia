@@ -1,6 +1,8 @@
 #ifndef WC_LIB_H
 #define WC_LIB_H
 
+#include <stddef.h>
+
 typedef unsigned ID_type;
 typedef struct {
     char** data;

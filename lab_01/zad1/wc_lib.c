@@ -5,19 +5,14 @@
 #include <string.h>
 
 // ----UTILITIES--------------------------
-typedef struct {
-    FILE* handle;
-    const char* name;
-} FileDesc;
-
 ID_type find_first_free_id(ArrayWC* array);
-int create_temp_file(FileDesc* file);
-char* read_whole_file(FILE* file);
+char* read_whole_file(const char* file_name);
 // ---------------------------------------
 
 ArrayWC wc_array_create(size_t size) {
     ArrayWC array;
-    array.data = calloc(size, sizeof(*(array.data)));
+
+    array.data = calloc(sizeof(*(array.data)), size);
     array.size = size;
 
     return array;
@@ -25,7 +20,6 @@ ArrayWC wc_array_create(size_t size) {
 
 void wc_array_destroy(ArrayWC* array) {
     free(array->data);
-    free(array);
 }
 
 // if returned i == array->size there was an error
@@ -34,18 +28,22 @@ ID_type wc_array_read(ArrayWC* array, const char* files_paths) {
 
     const ID_type id = find_first_free_id(array);
 
-    FileDesc tmp;
-    if (id == ERROR_CODE || create_temp_file(&tmp) == -1)
+    if (id == ERROR_CODE)
         return ERROR_CODE;
 
+    char file_name[L_tmpnam];
+    tmpnam(file_name);
+
     const size_t additional_commnad_buffer_size = 9;
-    char* command = calloc(sizeof(*command), additional_commnad_buffer_size + strlen(files_paths) + strlen(tmp.name));
-    sprintf(command, "wc %s > %s", files_paths, tmp.name);
+    char* command = calloc(sizeof(*command), additional_commnad_buffer_size + strlen(files_paths) + strlen(file_name));
+    sprintf(command, "wc %s > %s", files_paths, file_name);
     system(command);
 
-    array->data[id] = read_whole_file(tmp.handle);
+    array->data[id] = read_whole_file(file_name);
 
-    fclose(tmp.handle);
+    if (array->data[id] == NULL)
+        return ERROR_CODE;
+
     return id;
 }
 
@@ -54,6 +52,7 @@ void wc_array_remove(ArrayWC* array, ID_type id) {
         return;
 
     free(array->data[id]);
+    array->data[id] = NULL;
 }
 
 // ----UTILITIES--------------------------
@@ -65,27 +64,20 @@ ID_type find_first_free_id(ArrayWC* array) {
     return array->size;
 }
 
-int create_temp_file(FileDesc* file) {
-    char buffer[L_tmpnam];
-    tmpnam(buffer);
+char* read_whole_file(const char* file_name) {
+    FILE* file = fopen(file_name, "r");
 
-    file->handle = fopen(buffer, "w+");
+    if (file == NULL)
+        return NULL;
 
-    if (file->handle == NULL)
-        return -1;
-
-    file->name = buffer;
-
-    return 0;
-}
-
-char* read_whole_file(FILE* file) {
     fseek(file, 0, SEEK_END);
     long fsize = ftell(file);
     rewind(file);
 
     char* str = calloc(sizeof(*str), fsize + 1);
     fread(str, fsize, 1, file);
+
+    fclose(file);
 
     return str;
 }
