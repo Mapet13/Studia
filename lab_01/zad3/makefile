@@ -85,8 +85,8 @@ static_Os: add_os $(SRC) $(EXECUTABLE_STATIC)
 .PHONY: dynamic_Os
 dynamic_Os: add_os $(SRC) $(EXECUTABLE_DYNAMIC)
 
-.PHONY: shared_0s
-shared_0s: add_os $(SRC) $(EXECUTABLE_SHARED)
+.PHONY: shared_Os
+shared_Os: add_os $(SRC) $(EXECUTABLE_SHARED)
 
 .PHONY: static_lib
 static_lib: $(LIB_SRC) $(STATIC_LIB_FILE)

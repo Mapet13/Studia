@@ -129,3 +129,276 @@ Time Real: 0.000000
 Time User: 0.000000
 Time Sys: 0.000000
 ----------------------------------
+##################################################################################################################################################################################
+STATIC -Os:
+----------------------------------
+Command: create_table   20 
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: create_table   20  
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/small  
+Time Real: 0.010000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/medium  
+Time Real: 0.110000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/large  
+Time Real: 0.520000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/large test_files/medium test_files/small  
+Time Real: 0.610000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/medium test_files/medium2 test_files/medium3 test_files/medium4 test_files/medium5 test_files/medium6 test_files/medium7 test_files/medium8 test_files/medium9  
+Time Real: 0.980000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: remove_block   3  
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+##################################################################################################################################################################################
+STATIC -O1:
+----------------------------------
+Command: create_table   20  
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/small  
+Time Real: 0.010000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/medium  
+Time Real: 0.110000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/large  
+Time Real: 0.540000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/large test_files/medium test_files/small  
+Time Real: 0.590000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/medium test_files/medium2 test_files/medium3 test_files/medium4 test_files/medium5 test_files/medium6 test_files/medium7 test_files/medium8 test_files/medium9  
+Time Real: 0.940000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: remove_block   3  
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+##################################################################################################################################################################################
+SHARED -O1:
+----------------------------------
+Command: create_table   20  
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/small  
+Time Real: 0.010000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/medium  
+Time Real: 0.120000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/large  
+Time Real: 0.520000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/large test_files/medium test_files/small  
+Time Real: 0.620000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/medium test_files/medium2 test_files/medium3 test_files/medium4 test_files/medium5 test_files/medium6 test_files/medium7 test_files/medium8 test_files/medium9  
+Time Real: 0.910000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: remove_block   3  
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+##################################################################################################################################################################################
+SHARED -Os:
+----------------------------------
+Command: create_table   20  
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/small  
+Time Real: 0.010000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/medium  
+Time Real: 0.120000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/large  
+Time Real: 0.540000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/large test_files/medium test_files/small  
+Time Real: 0.650000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/medium test_files/medium2 test_files/medium3 test_files/medium4 test_files/medium5 test_files/medium6 test_files/medium7 test_files/medium8 test_files/medium9  
+Time Real: 0.960000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: remove_block   3  
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+##################################################################################################################################################################################
+DYNAMIC -Os:
+----------------------------------
+Command: create_table   20  
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/small  
+Time Real: 0.010000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/medium  
+Time Real: 0.110000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/large  
+Time Real: 0.490000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/large test_files/medium test_files/small  
+Time Real: 0.600000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/medium test_files/medium2 test_files/medium3 test_files/medium4 test_files/medium5 test_files/medium6 test_files/medium7 test_files/medium8 test_files/medium9  
+Time Real: 0.950000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: remove_block   3  
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+##################################################################################################################################################################################
+DYNAMIC -O1:
+----------------------------------
+Command: create_table   20  
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/small  
+Time Real: 0.010000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/medium  
+Time Real: 0.120000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/large  
+Time Real: 0.530000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/large test_files/medium test_files/small  
+Time Real: 0.630000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: wc_files   test_files/medium test_files/medium2 test_files/medium3 test_files/medium4 test_files/medium5 test_files/medium6 test_files/medium7 test_files/medium8 test_files/medium9  
+Time Real: 0.920000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
+----------------------------------
+Command: remove_block   3  
+Time Real: 0.000000
+Time User: 0.000000
+Time Sys: 0.000000
+----------------------------------
