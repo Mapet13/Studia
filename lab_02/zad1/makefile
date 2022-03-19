@@ -1,7 +1,7 @@
 #remove all default echoes
-# ifndef VERBOSE
-# .SILENT:
-# endif
+ifndef VERBOSE
+.SILENT:
+endif
 
 #Vars
 CC         := gcc
@@ -16,15 +16,27 @@ OBJ_DIR    := obj
 SRC    	   := fcopy.c
 EXE_NAME   := fcopy
 
-OBJECTS    := $(SRC:%.c=$(OBJ_DIR)/%.o)
+LIB_EXE_NAME := $(EXE_NAME)_lib
+SYS_EXE_NAME := $(EXE_NAME)_sys
 
-EXECUTABLE := $(OUT_FOLDER)/$(EXE_NAME)
+OBJECTS_LIB  := $(SRC:%.c=$(OBJ_DIR)/lib/%.o)
+OBJECTS_SYS  := $(SRC:%.c=$(OBJ_DIR)/sys/%.o)
+
+EXECUTABLE_LIB := $(OUT_FOLDER)/$(LIB_EXE_NAME)
+EXECUTABLE_SYS := $(OUT_FOLDER)/$(SYS_EXE_NAME)
+
 
 .PHONY: default
 default: $(SRC) $(EXECUTABLE)
 
+.PHONY: lib
+lib: $(SRC) $(EXECUTABLE_LIB)
+
+.PHONY: sys
+sys: $(SRC) $(EXECUTABLE_SYS)
+
 .PHONY: all
-all: clean default
+all: clean lib sys
 
 .PHONY: clean
 clean:
@@ -41,11 +53,20 @@ help:
 $(OUT_FOLDER):
 	mkdir -p $@
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/lib/%.o: %.c
 	@echo "Compiling: $<"
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INC_DIR) $< -o $@
 
-$(EXECUTABLE): $(OBJECTS) $(OUT_FOLDER)
+$(OBJ_DIR)/sys/%.o: %.c
+	@echo "Compiling: $<"
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -DSYS_MODE $(INC_DIR) $< -o $@
+
+$(EXECUTABLE_LIB): $(OBJECTS_LIB) $(OUT_FOLDER)
 	@echo "EXECUTABLE: $@"
-	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+	$(CC) $(OBJECTS_LIB) $(LDFLAGS) -o $@
+
+$(EXECUTABLE_SYS): $(OBJECTS_SYS) $(OUT_FOLDER)
+	@echo "EXECUTABLE: $@"
+	$(CC) $(OBJECTS_SYS) $(LDFLAGS) -o $@

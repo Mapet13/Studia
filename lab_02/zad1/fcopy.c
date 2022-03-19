@@ -4,6 +4,9 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include <fcntl.h> 
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #define FILE_COUNT 2
 #define BUFFER_SIZE 256
@@ -17,8 +20,16 @@ void __log__(char* mess, char* time, char* file, int line) {
 }
 /////////////////////////////////////////////////////////////////////////
 
+#ifdef SYS_MODE
+typedef int FILE_HANDLER;
+#else
+typedef FILE* FILE_HANDLER;
+#endif
+
 void get_files_from_user(char** files);
 void copy_file(char** files_names);
+void my_write(FILE_HANDLER file, char* str, size_t size);
+size_t my_read(FILE_HANDLER file, char* str, size_t size);
 
 int main(int argc, char** argv) {
     char** files_names;
@@ -53,10 +64,6 @@ void get_files_from_user(char** files) {
     }
 }
 
-#ifdef SYS_MODE
-// todo
-#else
-
 int is_empty(char* line) {
     // LF || CRLF
     return strlen(line) == 0 || strcmp(line, "\r") == 0;
@@ -66,11 +73,11 @@ int is_first_line_empty(char* str) {
     return str[0] == '\n' || strncmp(str, "\r\n", 2) == 0;
 }
 
-void append_new_line_to_file(FILE* out) {
-    fwrite("\n", sizeof(char), 1, out);
-} 
+void append_new_line_to_file(FILE_HANDLER out) {
+    my_write(out, "\n", 1);
+}
 
-int write_without_empty_lines(char* chunk, size_t read_chars, FILE* out, int was_last_endl) {
+int write_without_empty_lines(char* chunk, size_t read_chars, FILE_HANDLER out, int was_last_endl) {
     char* str = malloc(sizeof(*str) * (read_chars + 1));
     strncpy(str, chunk, read_chars);
     
@@ -90,11 +97,11 @@ int write_without_empty_lines(char* chunk, size_t read_chars, FILE* out, int was
         if(!is_empty(line)) {
             if(!next_line && !(last == '\n' || last == 0)) {
                 was_last_endl = 0;
-                fwrite(line, sizeof(char), strlen(line), out);
+                my_write(out, line, strlen(line));
             }
             else {
                 was_last_endl = 1;
-                fwrite(line, sizeof(char), strlen(line), out);
+                my_write(out, line, strlen(line));
                 append_new_line_to_file(out);
             }
          }
@@ -102,27 +109,50 @@ int write_without_empty_lines(char* chunk, size_t read_chars, FILE* out, int was
         line = next_line;
     }
 
-
     free(str);
     return was_last_endl;
 }
-    
-void copy_file(char** files_names) {
-    FILE* in = fopen(files_names[0], "r");
-    FILE* out = fopen(files_names[1], "w+");
 
-    assert(in && out);
+
+void copy_file(char** files_names) {
+    #ifdef SYS_MODE
+        FILE_HANDLER in = open(files_names[0], O_RDONLY);
+        FILE_HANDLER out = open(files_names[1], O_WRONLY | O_CREAT);
+    #else
+        FILE* in = fopen(files_names[0], "r");
+        FILE* out = fopen(files_names[1], "w+");
+    #endif
+
 
     char chunk[BUFFER_SIZE];
     int was_last_endl = 1;
     size_t read_chars;
     do {
-        read_chars = fread(chunk, sizeof(*chunk), BUFFER_SIZE, in);
+        read_chars = my_read(in, chunk, BUFFER_SIZE);
         was_last_endl = write_without_empty_lines(chunk, read_chars, out, was_last_endl);
     } while (read_chars == BUFFER_SIZE);
 
-    fclose(in);
-    fclose(out);
+    #ifdef SYS_MODE
+        close(in);
+        close(out);
+    #else
+        fclose(in);
+        fclose(out);
+    #endif
 }
 
+#ifdef SYS_MODE
+void my_write(FILE_HANDLER file, char* str, size_t size) {
+    write(file, str, size);
+}
+size_t my_read(FILE_HANDLER file, char* str, size_t size) {
+    return read(file, str, size);
+} 
+#else
+void my_write(FILE_HANDLER file, char* str, size_t size) {
+    fwrite(str, sizeof(char), size, file);
+}
+size_t my_read(FILE_HANDLER file, char* str, size_t size) {
+    return fread(str, sizeof(char), size, file);
+}
 #endif

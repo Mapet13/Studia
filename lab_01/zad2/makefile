@@ -3,6 +3,8 @@ ifndef VERBOSE
 .SILENT:
 endif
 
+DEFAULT_MODE := lib
+
 #Vars
 CC         := gcc
 CFLAGS     := -c -std=gnu11 -Wall
@@ -16,15 +18,26 @@ OBJ_DIR    := obj
 SRC    	   := wc_lib.c wc_test.c
 EXE_NAME   := wc_test
 
-OBJECTS    := $(SRC:%.c=$(OBJ_DIR)/%.o)
+LIB_EXE_NAME := $(EXE_NAME)_lib
+SYS_EXE_NAME := $(EXE_NAME)_sys
 
-EXECUTABLE := $(OUT_FOLDER)/$(EXE_NAME)
+OBJECTS_LIB    := $(SRC:%.c=$(OBJ_DIR)/lib/%.o)
+OBJECTS_SYS    := $(SRC:%.c=$(OBJ_DIR)/sys/%.o)
+
+EXECUTABLE_LIB := $(OUT_FOLDER)/$(LIB_EXE_NAME)
+EXECUTABLE_SYS := $(OUT_FOLDER)/$(SYS_EXE_NAME)
 
 .PHONY: default
-default: $(SRC) $(EXECUTABLE)
+default:  $(DEFAULT_MODE)
+
+.PHONY: lib
+lib: $(SRC) $(EXECUTABLE_LIB)
+
+.PHONY: sys
+sys: $(SRC) $(EXECUTABLE_SYS)
 
 .PHONY: all
-all: clean default
+all: clean lib sys
 
 .PHONY: clean
 clean:
@@ -46,6 +59,12 @@ $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INC_DIR) $< -o $@
 
-$(EXECUTABLE): $(OBJECTS) $(OUT_FOLDER)
+$(EXECUTABLE_LIB): $(OBJECTS) $(OUT_FOLDER)
 	@echo "EXECUTABLE: $@"
 	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+
+$(EXECUTABLE_SYS): $(OBJECTS_SYS) $(OUT_FOLDER)
+	@echo "EXECUTABLE: $@"
+	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+
+	
