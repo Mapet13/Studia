@@ -1,7 +1,7 @@
-#remove all default echoes
-# ifndef VERBOSE
-# .SILENT:
-# endif
+remove all default echoes
+ifndef VERBOSE
+.SILENT:
+endif
 
 DEFAULT_LINKING := static
 
