@@ -7,23 +7,21 @@
 #include <fcntl.h> 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/times.h>
+#include <time.h>
+#include <unistd.h>
 
 #define BUFFER_SIZE 256
-
-/////////////////////////////////////////////////////////////////////////
-#define CHECK __log__("CHECK", __TIMESTAMP__, __FILE__, __LINE__)
-#define LOG(mess) __log__(mess, __TIMESTAMP__, __FILE__, __LINE__)
-void __log__(char* mess, char* time, char* file, int line) {
-    printf("%s [%s:%d]: %s\n", time, file, line, mess);
-    fflush(stdin);
-}
-/////////////////////////////////////////////////////////////////////////
 
 #ifdef SYS_MODE
 typedef int FILE_HANDLER;
 #else
 typedef FILE* FILE_HANDLER;
 #endif
+
+static clock_t g_time;
+void timer_start(void);
+void timer_check();
 
 void count_in_file(char* file_name, char demanded);
 size_t my_read(FILE_HANDLER file, char* str, size_t size);
@@ -35,7 +33,9 @@ int main(int argc, char** argv) {
     char* file_name = argv[2];  
     char character = *(argv[1]);  
 
+    timer_start();
     count_in_file(file_name, character);
+    timer_check();
 }
 
 int count_demanded(char demanded, char* chunk, size_t read_chars, size_t* char_count, size_t* line_count, int was_counted) {
@@ -88,3 +88,28 @@ void count_in_file(char* file_name, char demanded) {
         fclose(file);
     #endif
 }
+
+////////////////////////////////////////////////////////////////////////////////
+void timer_start(void) {
+    struct tms tms_now;
+    g_time = times(&tms_now);
+}
+
+double get_time_diff(clock_t start, clock_t end) {
+    return (double)(end - start) / (double)sysconf(_SC_CLK_TCK);
+}
+
+void write_timer_results(FILE* out, double real) {
+    fprintf(out, "----------------------------------\n");
+    fprintf(out, "Time Real: %f\n", real);
+    fprintf(out, "----------------------------------\n");
+}
+
+void timer_check() {
+    struct tms tms_now;
+    clock_t time_end = times(&tms_now);
+
+    double real = get_time_diff(g_time, time_end);
+    write_timer_results(stdout, real);
+}
+////////////////////////////////////////////////////////////////////////////////
