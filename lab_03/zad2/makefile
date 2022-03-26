@@ -5,7 +5,7 @@ endif
 
 #Vars
 CC         := gcc
-CFLAGS     := -c -std=c11 -Wall
+CFLAGS     := -c -std=c11 -g -Wall
 
 INC_DIR    := 
 LDFLAGS    :=

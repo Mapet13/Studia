@@ -66,13 +66,9 @@ void save_sum(int id, double sum) {
     char* file_name = get_file_name(id);
     FILE* file = fopen(file_name, "w+");
 
-    printf("%f\n", sum);
     fprintf(file, "%f", sum);
 
     free(file_name);
-
-    fflush(file);
-
     fclose(file);
 }
 
@@ -84,7 +80,7 @@ char* get_file_name(int id) {
 
 double read_segment_sum(int id) {
     char* file_name = get_file_name(id);
-    FILE* file = fopen(file_name, "w+");
+    FILE* file = fopen(file_name, "r");
     
     char sum[BUFFER_SIZE];
     fread(sum, sizeof(*sum), BUFFER_SIZE, file);
