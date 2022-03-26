@@ -70,6 +70,9 @@ void save_sum(int id, double sum) {
     fprintf(file, "%f", sum);
 
     free(file_name);
+
+    fflush(file);
+
     fclose(file);
 }
 
