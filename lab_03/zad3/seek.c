@@ -116,5 +116,7 @@ char* seek_in_dir(const char* dir_path, const char* target) {
 
         free(file_path);
     }
+
+    closedir(dir);
     return NULL;
 }
