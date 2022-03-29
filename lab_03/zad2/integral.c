@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include <sys/types.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 #include <sys/wait.h>
+#include <unistd.h>
 
 #define MIN_DOMAIN 0
 #define MAX_DOMAIN 1
@@ -12,14 +12,14 @@
 #define DOUBLE_PRECISION 8
 
 double f(double x) {
-    return 4.0/((x * x) + 1.0);
+    return 4.0 / ((x * x) + 1.0);
 }
 
 void child_work(int id, double start, double end, double width);
 double read_segment_sum(int id);
 
 int main(int argc, char** argv) {
-    if(argc != 3)
+    if (argc != 3)
         return -1;
 
     double WIDTH = atof(argv[1]);
@@ -29,18 +29,19 @@ int main(int argc, char** argv) {
 
     double start = 0.0f;
     double end = proces_segment_width;
-    for(int i = 1; i <= N; ++i, start = end, end += proces_segment_width) {
+    for (int i = 1; i <= N; ++i, start = end, end += proces_segment_width) {
         pid_t pid = fork();
-        if(pid == 0) {
+        if (pid == 0) {
             child_work(i, start, end, WIDTH);
             exit(0);
         }
     }
 
-    while(wait(NULL) > 0);
+    while (wait(NULL) > 0)
+        ;
 
     double sum = 0.0f;
-    for(int i = 1; i <= N; ++i)
+    for (int i = 1; i <= N; ++i)
         sum += read_segment_sum(i);
 
     printf("Calculation result: %f \n", sum);
@@ -52,7 +53,7 @@ char* get_file_name(int id);
 void child_work(int id, double start, double end, double width) {
     double sum = 0.0f;
 
-    while(start + width < end) {
+    while (start + width < end) {
         sum += f(start) * width;
         start += width;
     }
@@ -81,7 +82,7 @@ char* get_file_name(int id) {
 double read_segment_sum(int id) {
     char* file_name = get_file_name(id);
     FILE* file = fopen(file_name, "r");
-    
+
     char sum[BUFFER_SIZE];
     fread(sum, sizeof(*sum), BUFFER_SIZE, file);
 
