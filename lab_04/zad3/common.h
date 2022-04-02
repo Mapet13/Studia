@@ -18,9 +18,10 @@ typedef enum {
 
 ModeType parseMode(const char*);
 void send_signals(ModeType, pid_t, size_t, int, int);
-sigset_t create_mask();
+sigset_t create_mask(int, int);
 void handle_signal_counter(int signo, siginfo_t* info, void* context);
-void setup_signal_handlers(void (*)(int, siginfo_t*, void*));
+void setup_signal_handlers(void (*)(int, siginfo_t*, void*), int, int);
+void getSignals(ModeType*, int*, int*);
 
 extern size_t g_signalCatchedCount;
 extern int g_shouldListen;

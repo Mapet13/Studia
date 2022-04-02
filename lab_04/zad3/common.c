@@ -3,6 +3,8 @@
 size_t g_signalCatchedCount = 0;
 int g_shouldListen = 1;
 
+static ModeType g_mode; 
+
 ModeType parseMode(const char* str) {
     if(strcmp(str, "KILL") == 0) return KILL_MODE;
     if(strcmp(str, "SIGQUEUE") == 0) return SIGQUEUE_MODE;
@@ -20,6 +22,7 @@ void send_signal(ModeType mode, pid_t pid, int signal_id, int message) {
             sigval_t sigval = { message };
             sigqueue(pid, signal_id, sigval);
             break;
+        default: break;
     }
 }
 
@@ -30,20 +33,22 @@ void send_signals(ModeType mode, pid_t pid, size_t count, int signal_id, int fin
     send_signal(mode, pid, finishing_signal_id, count);
 } 
 
-sigset_t create_mask()
+sigset_t create_mask(int signal_id, int finish_signal_id)
 {
     sigset_t mask;
     sigfillset(&mask);
 
-    sigdelset(&mask, SIGUSR1);
-    sigdelset(&mask, SIGUSR2);
+    sigdelset(&mask, signal_id);
+    sigdelset(&mask, finish_signal_id);
 
     return mask;
 }
 
 void handle_signal_counter(int signo, siginfo_t* info, void* context) {
     g_signalCatchedCount += 1;
-    printf("Recived signal's id: [%d]\n", info->si_value.sival_int);
+    
+    if(g_mode == SIGQUEUE_MODE)
+        printf("Recived signal's id: [%d]\n", info->si_value.sival_int);
 }
 
 void set_signal_handler(int signal_id, void (*handler)(int, siginfo_t*, void*)) {
@@ -55,7 +60,20 @@ void set_signal_handler(int signal_id, void (*handler)(int, siginfo_t*, void*)) 
 	sigaction(signal_id, &sig, NULL);
 }
 
-void setup_signal_handlers(void (*finish_signal_handler)(int, siginfo_t*, void*)) {
-    set_signal_handler(SIGUSR1, handle_signal_counter);
-    set_signal_handler(SIGUSR2, finish_signal_handler);
+void setup_signal_handlers(void (*finish_signal_handler)(int, siginfo_t*, void*), int signal_id, int finish_signal_id) {
+    set_signal_handler(signal_id, handle_signal_counter);
+    set_signal_handler(finish_signal_id, finish_signal_handler);
 }
+
+void getSignals(ModeType* mode, int* signal_id, int* finish_signal_id) {
+    if(*mode == SIGRT_MODE) {
+        *mode = KILL_MODE;
+        *signal_id = SIGRTMIN;
+        *finish_signal_id = SIGRTMAX;
+    } else {
+        *signal_id = SIGUSR1;
+        *finish_signal_id = SIGUSR2;
+    }
+
+    g_mode = *mode;
+} 

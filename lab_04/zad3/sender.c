@@ -19,7 +19,7 @@ int load_input(int argc, char** argv, pid_t* catcher_pid, int* sends_count, Mode
 }
 
 void handle_signal_finish(int signo, siginfo_t* info, void* context) {
-    printf("Catched %lu SIGUSR1 signals in return\n", g_signalCatchedCount);
+    printf("Catched %lu signals in return\n", g_signalCatchedCount);
     g_shouldListen = 0;
 }
 
@@ -31,13 +31,18 @@ int main(int argc, char** argv) {
     if(load_input(argc, argv, &catcher_pid, &sends_count, &mode) == ERROR_CODE) 
         return 1;
 
+    int signal_id;
+    int finished_signal_id;
+    getSignals(&mode, &signal_id, &finished_signal_id);
+
     printf("sending %d signals to %d...\n", sends_count, catcher_pid);
-    send_signals(mode, catcher_pid, sends_count, SIGUSR1, SIGUSR2);
+
+    send_signals(mode, catcher_pid, sends_count, signal_id, finished_signal_id);
     puts("sending finished");
 
-    setup_signal_handlers(handle_signal_finish);
+    setup_signal_handlers(handle_signal_finish, signal_id, finished_signal_id);
 
-    sigset_t mask = create_mask();
+    sigset_t mask = create_mask(signal_id, finished_signal_id);
     while(g_shouldListen)
         sigsuspend(&mask);
 }

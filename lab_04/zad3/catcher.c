@@ -8,7 +8,7 @@ void print_pid() {
 
 void handle_signal_finish(int signo, siginfo_t* info, void* context) {
     g_senderPID = info->si_pid;
-    printf("Catched %lu SIGUSR1 signals from %d\n", g_signalCatchedCount, g_senderPID);
+    printf("Catched %lu signals from %d\n", g_signalCatchedCount, g_senderPID);
     g_shouldListen = 0;
 }
 
@@ -20,12 +20,17 @@ int main(int argc, char** argv) {
     if(mode == ERROR_MODE)
         return 1;
 
+    int signal_id;
+    int finished_signal_id;
+    getSignals(&mode, &signal_id, &finished_signal_id);
+    
     print_pid();
-    setup_signal_handlers(handle_signal_finish);
+    setup_signal_handlers(handle_signal_finish, signal_id, finished_signal_id);
 
-    sigset_t mask = create_mask();
+    sigset_t mask = create_mask(signal_id, finished_signal_id);
     while(g_shouldListen)
         sigsuspend(&mask);
 
-    send_signals(mode, g_senderPID, g_signalCatchedCount, SIGUSR1, SIGUSR2);
+
+    send_signals(mode, g_senderPID, g_signalCatchedCount, signal_id, finished_signal_id);
 }
