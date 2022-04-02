@@ -3,21 +3,6 @@
 #define ARGS_COUNT 3
 #define ERROR_CODE -1
 
-typedef enum {
-    KILL_MODE,
-    SIGQUEUE_MODE,
-    SIGRT_MODE,
-    ERROR_MODE
-} ModeType;
-
-ModeType parseMode(const char* str) {
-    if(strcmp(str, "KILL") == 0) return KILL_MODE;
-    if(strcmp(str, "SIGQUEUE") == 0) return SIGQUEUE_MODE;
-    if(strcmp(str, "SIGRT") == 0) return SIGRT_MODE;
-
-    return ERROR_MODE;
-}
-
 int load_input(int argc, char** argv, pid_t* catcher_pid, int* sends_count, ModeType* mode) {
     if(argc != ARGS_COUNT + 1) {
         return -1;
@@ -47,8 +32,7 @@ int main(int argc, char** argv) {
         return 1;
 
     printf("sending %d signals to %d...\n", sends_count, catcher_pid);
-    send_signals(catcher_pid, sends_count, SIGUSR1);
-    kill(catcher_pid, SIGUSR2);
+    send_signals(mode, catcher_pid, sends_count, SIGUSR1, SIGUSR2);
     puts("sending finished");
 
     setup_signal_handlers(handle_signal_finish);

@@ -12,7 +12,14 @@ void handle_signal_finish(int signo, siginfo_t* info, void* context) {
     g_shouldListen = 0;
 }
 
-int main() {
+int main(int argc, char** argv) {
+    if(argc != 2)
+        return 1;
+    
+    ModeType mode = parseMode(argv[1]);
+    if(mode == ERROR_MODE)
+        return 1;
+
     print_pid();
     setup_signal_handlers(handle_signal_finish);
 
@@ -20,6 +27,5 @@ int main() {
     while(g_shouldListen)
         sigsuspend(&mask);
 
-    send_signals(g_senderPID, g_signalCatchedCount, SIGUSR1);
-    kill(g_senderPID, SIGUSR2);
+    send_signals(mode, g_senderPID, g_signalCatchedCount, SIGUSR1, SIGUSR2);
 }
