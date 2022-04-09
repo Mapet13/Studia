@@ -1,0 +1,10 @@
+składnik1 = cat /etc/passwd | wc -l
+składnik2 = ls | grep '.'
+składnik3 = grep 45
+składnik4 = printf 1231231313\n45\nsahbdsjbjas
+random_name = grep 123
+
+składnik1 | składnik3
+składnik1
+składnik4 | składnik3
+składnik4 | random_name
