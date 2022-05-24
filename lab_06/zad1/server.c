@@ -16,7 +16,6 @@ typedef struct {
 } ServerContext;
 ServerContext g_context;
 
-
 void shutdown();
 
 Queue_data create_queue() {
