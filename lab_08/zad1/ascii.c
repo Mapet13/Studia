@@ -104,7 +104,6 @@ void* negate_block(void* arg) {
         }
     }
 
-
     free(args);
 
     return NULL;
