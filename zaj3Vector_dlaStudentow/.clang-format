@@ -1,0 +1,13 @@
+BasedOnStyle: Google
+AlignAfterOpenBracket: Align
+DerivePointerAlignment: 'true'
+IndentWidth: '4'
+PointerAlignment: Left
+SpaceBeforeInheritanceColon: 'true'
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: 'false'
+TabWidth: '4'
+UseTab: Never
+Cpp11BracedListStyle: 'false'
+NamespaceIndentation: All
+ColumnLimit: 0
