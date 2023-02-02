@@ -31,3 +31,4 @@
  * [Camera motion detection](https://github.com/Herdran/Motion-detection)
  * [JJ programming language](https://github.com/tunczyk101/JJ_language)
  * [AHP based app - chosing a gaming console](https://github.com/Herdran/MiAPD-AGH)
+ * [Oil spill simulation based on Circular Automata](https://github.com/Herdran/Oil-Spill-Simulation)
