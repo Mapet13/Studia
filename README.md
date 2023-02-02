@@ -17,6 +17,7 @@
 * 4 semester
   - [SO - Operating Systems](https://github.com/Mapet13/Studia/tree/SO) 
   - [MOWNIT - Computation Methods for Science and Technology](https://github.com/Mapet13/Studia/tree/mownit)
+  - [MSD - Modeling of discrete systems](https://github.com/Mapet13/MSD)
 * 5 semester
   - [TW - Theory of Concurrency](https://github.com/Mapet13/Studia/tree/TW) 
   - [PSI - Fundamentals of artificial intelligence](https://github.com/Mapet13/Studia/tree/PSI)
