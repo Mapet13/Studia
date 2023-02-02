@@ -1,0 +1,105 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
+      "mainClass": "com.tw.Main",
+      "projectName": "zadanie csp_2c868bec"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
+      "mainClass": "com.tw.Main",
+      "projectName": "zadanie csp_a4e6900d"
+    },
+    {
+      "type": "java",
+      "name": "Launch Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "java",
+      "name": "Launch FairPlexTimeTest",
+      "request": "launch",
+      "mainClass": "FairPlexTimeTest",
+      "projectName": "CSP_c1d30067"
+    },
+    {
+      "type": "java",
+      "name": "Launch PollingTest",
+      "request": "launch",
+      "mainClass": "PollingTest",
+      "projectName": "CSP_c1d30067"
+    },
+    {
+      "type": "java",
+      "name": "Launch PriPlexTimeTest",
+      "request": "launch",
+      "mainClass": "PriPlexTimeTest",
+      "projectName": "CSP_c1d30067"
+    },
+    {
+      "type": "java",
+      "name": "Launch RegulateTest",
+      "request": "launch",
+      "mainClass": "RegulateTest",
+      "projectName": "CSP_c1d30067"
+    },
+    {
+      "type": "java",
+      "name": "Launch StressedAlt",
+      "request": "launch",
+      "mainClass": "StressedAlt",
+      "projectName": "CSP_c1d30067"
+    },
+    {
+      "type": "java",
+      "name": "Launch Main",
+      "request": "launch",
+      "mainClass": "com.tw.Main",
+      "projectName": "CSP_c1d30067"
+    },
+    {
+      "type": "java",
+      "name": "Launch FairPlexTimeIntTest",
+      "request": "launch",
+      "mainClass": "ints.FairPlexTimeIntTest",
+      "projectName": "CSP_c1d30067"
+    },
+    {
+      "type": "java",
+      "name": "Launch PollingIntTest",
+      "request": "launch",
+      "mainClass": "ints.PollingIntTest",
+      "projectName": "CSP_c1d30067"
+    },
+    {
+      "type": "java",
+      "name": "Launch PriPlexTimeIntTest",
+      "request": "launch",
+      "mainClass": "ints.PriPlexTimeIntTest",
+      "projectName": "CSP_c1d30067"
+    },
+    {
+      "type": "java",
+      "name": "Launch RegulateIntTest",
+      "request": "launch",
+      "mainClass": "ints.RegulateIntTest",
+      "projectName": "CSP_c1d30067"
+    },
+    {
+      "type": "java",
+      "name": "Launch StressedAltInt",
+      "request": "launch",
+      "mainClass": "ints.StressedAltInt",
+      "projectName": "CSP_c1d30067"
+    }
+  ]
+}

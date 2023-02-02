@@ -1,0 +1,383 @@
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=0, threads_count=1, seed=-1188957731]
+AO average work count: 81038.3
+AO average iterations: 54005.4
+AO average time saved: 1822.6201099999998
+Sync average work count: 628927.8
+Sync average iterations: 419211.4
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=0, threads_count=2, seed=1018954901]
+AO average work count: 84688.7
+AO average iterations: 56438.55
+AO average time saved: 1894.8832200000002
+Sync average work count: 334697.15
+Sync average iterations: 223103.45
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=0, threads_count=4, seed=-39088943]
+AO average work count: 93161.525
+AO average iterations: 62097.0
+AO average time saved: 1955.5314275
+Sync average work count: 155867.65
+Sync average iterations: 103893.65
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=0, threads_count=8, seed=1295249578]
+AO average work count: 55948.725
+AO average iterations: 37297.675
+AO average time saved: 1976.88847375
+Sync average work count: 77174.325
+Sync average iterations: 51445.5375
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=0, threads_count=16, seed=1087885590]
+AO average work count: 29147.175
+AO average iterations: 19432.0
+AO average time saved: 1988.1262756249998
+Sync average work count: 38566.7
+Sync average iterations: 25714.75625
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=0, threads_count=32, seed=-1829099982]
+AO average work count: 14229.4125
+AO average iterations: 9486.478125
+AO average time saved: 1993.7440928125002
+Sync average work count: 18664.71875
+Sync average iterations: 12444.10625
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=0, threads_count=64, seed=-1680189627]
+AO average work count: 6979.1546875
+AO average iterations: 4653.6234375
+AO average time saved: 1996.49692609375
+Sync average work count: 9136.7515625
+Sync average iterations: 6091.078125
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=0, threads_count=128, seed=1111887674]
+AO average work count: 3587.83828125
+AO average iterations: 2392.234375
+AO average time saved: 1997.5674717968752
+Sync average work count: 4621.065625
+Sync average iterations: 3081.440625
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10, threads_count=1, seed=-833784125]
+AO average work count: 80939.5
+AO average iterations: 53951.2
+AO average time saved: 1834.3073799999997
+Sync average work count: 602285.1
+Sync average iterations: 401463.8
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10, threads_count=2, seed=-1621910390]
+AO average work count: 81318.4
+AO average iterations: 54188.0
+AO average time saved: 1902.67588
+Sync average work count: 324761.0
+Sync average iterations: 216495.9
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10, threads_count=4, seed=-535098017]
+AO average work count: 73465.6
+AO average iterations: 48965.7
+AO average time saved: 1963.8557950000002
+Sync average work count: 128259.3
+Sync average iterations: 85483.825
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10, threads_count=8, seed=-1935747844]
+AO average work count: 37767.5
+AO average iterations: 25182.225
+AO average time saved: 1980.99321375
+Sync average work count: 54221.7875
+Sync average iterations: 36151.4625
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10, threads_count=16, seed=-1219562352]
+AO average work count: 20264.1375
+AO average iterations: 13506.9125
+AO average time saved: 1990.7513143750002
+Sync average work count: 29003.85
+Sync average iterations: 19337.01875
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10, threads_count=32, seed=696711130]
+AO average work count: 9828.18125
+AO average iterations: 6550.534375
+AO average time saved: 1995.0900884374998
+Sync average work count: 14443.775
+Sync average iterations: 9627.95
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10, threads_count=64, seed=308881275]
+AO average work count: 4680.0765625
+AO average iterations: 3120.525
+AO average time saved: 1997.3332860937498
+Sync average work count: 7305.4359375
+Sync average iterations: 4871.346875
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10, threads_count=128, seed=-1366603797]
+AO average work count: 2248.528125
+AO average iterations: 1499.86953125
+AO average time saved: 1998.2822067187499
+Sync average work count: 3667.9515625
+Sync average iterations: 2445.965625
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100, threads_count=1, seed=-875052456]
+AO average work count: 56398.8
+AO average iterations: 37605.5
+AO average time saved: 1865.61603
+Sync average work count: 153280.8
+Sync average iterations: 102200.1
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100, threads_count=2, seed=1149563170]
+AO average work count: 59266.1
+AO average iterations: 39517.65
+AO average time saved: 1951.4006249999998
+Sync average work count: 66444.0
+Sync average iterations: 44309.65
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100, threads_count=4, seed=-1809396988]
+AO average work count: 40956.85
+AO average iterations: 27311.85
+AO average time saved: 1986.11113
+Sync average work count: 36427.35
+Sync average iterations: 24285.075
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100, threads_count=8, seed=1041944832]
+AO average work count: 20774.6375
+AO average iterations: 13843.1875
+AO average time saved: 1992.9794675
+Sync average work count: 18097.575
+Sync average iterations: 12063.6375
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100, threads_count=16, seed=-394597452]
+AO average work count: 10372.1875
+AO average iterations: 6918.34375
+AO average time saved: 1996.229809375
+Sync average work count: 8742.65
+Sync average iterations: 5828.19375
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100, threads_count=32, seed=-1708209621]
+AO average work count: 5132.20625
+AO average iterations: 3422.8625
+AO average time saved: 1997.8552921875003
+Sync average work count: 4457.378125
+Sync average iterations: 2972.2375
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100, threads_count=64, seed=639583273]
+AO average work count: 2598.5375
+AO average iterations: 1731.5828125
+AO average time saved: 1998.4648174999998
+Sync average work count: 2197.55
+Sync average iterations: 1464.5765625
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100, threads_count=128, seed=930399700]
+AO average work count: 1257.58125
+AO average iterations: 838.40859375
+AO average time saved: 1998.160048828125
+Sync average work count: 1106.2234375
+Sync average iterations: 737.84609375
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=1000, threads_count=1, seed=-106429739]
+AO average work count: 20405.6
+AO average iterations: 13612.1
+AO average time saved: 1967.64703
+Sync average work count: 24251.1
+Sync average iterations: 16167.9
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=1000, threads_count=2, seed=1967925707]
+AO average work count: 12923.25
+AO average iterations: 8616.35
+AO average time saved: 1995.84205
+Sync average work count: 12043.95
+Sync average iterations: 8021.9
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=1000, threads_count=4, seed=281732816]
+AO average work count: 5669.925
+AO average iterations: 3774.625
+AO average time saved: 1997.6972375
+Sync average work count: 5093.9
+Sync average iterations: 3394.85
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=1000, threads_count=8, seed=382363784]
+AO average work count: 2788.7875
+AO average iterations: 1860.2625
+AO average time saved: 1998.2629037499999
+Sync average work count: 2669.2625
+Sync average iterations: 1782.5375
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=1000, threads_count=16, seed=298577043]
+AO average work count: 1433.13125
+AO average iterations: 954.00625
+AO average time saved: 1998.0765362500001
+Sync average work count: 1315.3125
+Sync average iterations: 875.85
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=1000, threads_count=32, seed=525072488]
+AO average work count: 733.775
+AO average iterations: 489.15
+AO average time saved: 1996.9892265624999
+Sync average work count: 677.2
+Sync average iterations: 451.55
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=1000, threads_count=64, seed=389778123]
+AO average work count: 368.2
+AO average iterations: 245.1921875
+AO average time saved: 1994.5620751562499
+Sync average work count: 346.1296875
+Sync average iterations: 230.378125
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=1000, threads_count=128, seed=1452179944]
+AO average work count: 180.88046875
+AO average iterations: 120.6
+AO average time saved: 1988.204187890625
+Sync average work count: 167.96171875
+Sync average iterations: 112.0359375
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10000, threads_count=1, seed=1823070661]
+AO average work count: 2288.9
+AO average iterations: 1526.6
+AO average time saved: 1993.5702100000003
+Sync average work count: 2279.4
+Sync average iterations: 1525.1
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10000, threads_count=2, seed=-292028230]
+AO average work count: 1116.85
+AO average iterations: 740.35
+AO average time saved: 1997.43086
+Sync average work count: 1125.85
+Sync average iterations: 751.0
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10000, threads_count=4, seed=-539486391]
+AO average work count: 600.175
+AO average iterations: 398.625
+AO average time saved: 1996.2204375000001
+Sync average work count: 584.45
+Sync average iterations: 389.975
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10000, threads_count=8, seed=-1383466546]
+AO average work count: 323.4625
+AO average iterations: 214.925
+AO average time saved: 1993.0296374999998
+Sync average work count: 316.1375
+Sync average iterations: 210.0125
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10000, threads_count=16, seed=-1824914989]
+AO average work count: 171.7625
+AO average iterations: 114.1
+AO average time saved: 1987.9562799999999
+Sync average work count: 167.60625
+Sync average iterations: 111.31875
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10000, threads_count=32, seed=8083668]
+AO average work count: 84.6625
+AO average iterations: 56.275
+AO average time saved: 1976.31983625
+Sync average work count: 83.353125
+Sync average iterations: 55.7625
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10000, threads_count=64, seed=1702941070]
+AO average work count: 42.6734375
+AO average iterations: 28.496875
+AO average time saved: 1951.8353109374998
+Sync average work count: 41.478125
+Sync average iterations: 27.825
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=10000, threads_count=128, seed=2146898372]
+AO average work count: 21.34296875
+AO average iterations: 14.26484375
+AO average time saved: 1902.7915894531247
+Sync average work count: 21.075
+Sync average iterations: 13.96484375
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100000, threads_count=1, seed=1109455496]
+AO average work count: 261.2
+AO average iterations: 171.0
+AO average time saved: 1987.48824
+Sync average work count: 252.8
+Sync average iterations: 172.3
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100000, threads_count=2, seed=-82323612]
+AO average work count: 132.55
+AO average iterations: 86.7
+AO average time saved: 1981.7870450000003
+Sync average work count: 129.05
+Sync average iterations: 85.8
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100000, threads_count=4, seed=656237286]
+AO average work count: 66.75
+AO average iterations: 43.725
+AO average time saved: 1972.5476549999998
+Sync average work count: 64.8
+Sync average iterations: 42.925
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100000, threads_count=8, seed=-851237395]
+AO average work count: 33.025
+AO average iterations: 21.9
+AO average time saved: 1936.7579687500001
+Sync average work count: 33.0
+Sync average iterations: 21.525
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100000, threads_count=16, seed=1118538028]
+AO average work count: 16.4125
+AO average iterations: 10.9375
+AO average time saved: 1883.432853125
+Sync average work count: 15.9125
+Sync average iterations: 10.75625
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100000, threads_count=32, seed=-924378823]
+AO average work count: 8.25
+AO average iterations: 5.459375
+AO average time saved: 1761.896029375
+Sync average work count: 7.95625
+Sync average iterations: 5.36875
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100000, threads_count=64, seed=1982908886]
+AO average work count: 4.140625
+AO average iterations: 2.740625
+AO average time saved: 1512.46843203125
+Sync average work count: 4.109375
+Sync average iterations: 2.6921875
+
+--------------------------------------------------------
+Run_parameters[buffer_hard_work_amount=100000, threads_count=128, seed=61937700]
+AO average work count: 2.0734375
+AO average iterations: 1.35703125
+AO average time saved: 1085.85495265625
+Sync average work count: 2.04765625
+Sync average iterations: 1.34140625
