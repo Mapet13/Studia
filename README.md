@@ -1,5 +1,5 @@
 <div align="center">
-<h1>This repo contains some of my programming tasks from studying <\a href=https://sylabusy.agh.edu.pl/en/1/1/16/1/4/12/13>computer science at AGH UST<a\></h1>
+<h1>This repo contains some of my programming tasks from studying <a href=https://sylabusy.agh.edu.pl/en/1/1/16/1/4/12/13>computer science at AGH UST</a></h1>
 </div>
  
 #### Courses (links to git branches):
