@@ -14,6 +14,12 @@
   - [PF - Functional Programming](https://github.com/Mapet13/Studia/tree/PF)
   - [RPIS - Probability and statistics](https://github.com/Mapet13/Studia/tree/RPIS)
   - [PBD - Introduction to Databases](https://github.com/Mapet13/Studia/tree/PBD)
+* 4 semester
+  - [SO - Operating Systems](https://github.com/Mapet13/Studia/tree/SO) 
+  - [MOWNIT - Computation Methods for Science and Technology](https://github.com/Mapet13/Studia/tree/mownit)
+* 5 semester
+  - [TW - Theory of Concurrency](https://github.com/Mapet13/Studia/tree/TW) 
+  - [PSI - Fundamentals of artificial intelligence](https://github.com/Mapet13/Studia/tree/PSI)
 
 #### Some Projects
  * [Animal simulation](https://github.com/Mapet13/animal_evolution_simulator)
