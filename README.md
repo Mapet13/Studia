@@ -28,5 +28,6 @@
  * [SPO graph transformations visualisation](https://github.com/TrifleMichael/BestTiagProjectEver)
  * [FEM solution for Gravitational potential equation](https://github.com/Mapet13/FEM)   
  * [Pokemon stats analysis (in polish)](https://github.com/Mapet13/Studia/tree/RPIS/Project)
+ * [Camera motion detection](https://github.com/Herdran/Motion-detection)
  * [JJ programming language](https://github.com/tunczyk101/JJ_language)
  * [AHP based app - chosing a gaming console](https://github.com/Herdran/MiAPD-AGH)
